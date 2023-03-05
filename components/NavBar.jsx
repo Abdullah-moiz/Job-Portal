@@ -54,7 +54,7 @@ export default function NavBar() {
                         <>
 
                             <BiLogOut onClick={handleLogout} className=' cursor-pointer text-3xl hover:text-red-500 transition-all duration-700' />
-                            <p className='text-lg px-4 font-semibold'>Abdullah Moiz</p>
+                            <p className='text-lg px-4 font-semibold'>{user?.name}</p>
                         </>
                     ) : (
                         <>
