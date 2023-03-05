@@ -1,9 +1,21 @@
 import Intro from '@/components/Intro'
 import NavBar from '@/components/NavBar'
+import { useSession } from "next-auth/react"
 import Head from 'next/head'
+import { useEffect } from 'react'
 
 
 export default function Home() {
+
+  const { data: session } = useSession()
+
+  useEffect(() => {
+    if(session) {
+      Router.push('/frontend/dashboard')
+    }
+  }, [session])
+
+
   return (
     <>
       <Head>

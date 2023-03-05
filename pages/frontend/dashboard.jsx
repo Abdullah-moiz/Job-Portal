@@ -1,17 +1,28 @@
 import React, { useEffect } from 'react'
-import { useSession, signIn, signOut } from "next-auth/react"
-import { useRouter } from 'next/navigation'
+import { useSession } from "next-auth/react"
+import Router from 'next/router';
+import { useDispatch } from 'react-redux';
+import { setUserData } from '@/Utils/UserSlice';
+import NavBar from '@/components/NavBar';
 
 export default function dashboard() {
-    const router = useRouter();
     const { data: session } = useSession()
-    
-    if(!session){
-        router.push('/');
-    }
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (!session) {
+            Router.push('/')
+        }
+        else {
+            dispatch(setUserData(session.user))
+        }
+    }, [session])
 
 
-  return (
-    <div>dashboard</div>
-  )
+    return (
+        <div>
+            <NavBar />
+            welcome {session?.user?.name}
+        </div>
+    )
 }
