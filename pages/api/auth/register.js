@@ -1,5 +1,5 @@
-import ConnectDB from '../../../DB/ConnectDB';
-import User from '../../../models/User';
+import ConnectDB from '@/DB/connectDB';
+import User from '@/models/User';
 import Joi from 'joi';
 import { hash } from 'bcryptjs';
 
