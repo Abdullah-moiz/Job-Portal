@@ -3,6 +3,7 @@ import NavBar from '@/components/NavBar'
 import { useSession } from "next-auth/react"
 import Head from 'next/head'
 import { useEffect } from 'react'
+import Router from 'next/router'
 
 
 export default function Home() {
@@ -11,7 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     if(session) {
-      Router.push('/frontend/dashboard')
+      Router.push('/frontend/Dashboard')
     }
   }, [session])
 
@@ -26,8 +27,6 @@ export default function Home() {
       </Head>
       <NavBar />
       <div className="w-full h-screen bg-gray-200  text-black">
-        <Intro />
-        <Intro />
         <Intro />
       </div>
     </>

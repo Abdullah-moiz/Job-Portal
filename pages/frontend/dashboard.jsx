@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setUserData } from '@/Utils/UserSlice';
 import NavBar from '@/components/NavBar';
 
-export default function dashboard() {
+export default function Dashboard() {
     const { data: session } = useSession()
     const dispatch = useDispatch()
 

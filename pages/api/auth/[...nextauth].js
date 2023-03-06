@@ -26,7 +26,8 @@ export default NextAuth({
     ],
     app : {
         signIn : "/auth/login"
-    }
+    },
+    secret: process.env.NEXTAUTH_SECRET,
 })
 
 

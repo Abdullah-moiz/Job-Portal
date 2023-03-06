@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSession } from "next-auth/react"
 import Link from 'next/link';
 import { logged_in } from '@/Services/auth';
-import { useRouter } from 'next/navigation';
 import Router from 'next/router';
 
 export default function Login() {
@@ -15,13 +14,10 @@ export default function Login() {
 
   useEffect(() => {
     if(session) {
-      Router.push('/frontend/dashboard')
+      Router.push('/frontend/Dashboard')
     }
   }, [session])
 
-
-
-  const router = useRouter();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState({ email: "", password: "" });
 

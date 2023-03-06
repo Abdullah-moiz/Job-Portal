@@ -7,7 +7,7 @@ import { register_me } from '@/Services/auth';
 import { useRouter } from 'next/navigation';
 import Router from 'next/router';
 
-export default function Register() {
+export default  Register  = () => {
 
 
   const { data: session } = useSession()
