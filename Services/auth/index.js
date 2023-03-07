@@ -1,11 +1,11 @@
 
-const baseURl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000/api/auth';
+
 import { signIn } from 'next-auth/react';
 
 
 export const register_me = async (formData) => {
     try {
-        const res = await fetch(`api/auth/register`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
