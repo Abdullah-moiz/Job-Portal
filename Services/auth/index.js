@@ -15,17 +15,23 @@ export const register_me = async (formData) => {
         const data = res.json();
         return data;
     } catch (error) {
-        console.log('error in log_in (service) => ', error);
+        console.log('error in register (service) => ', error);
     }
 }
 
 
 export const logged_in = async (FormData) => {
-    const { email, password } = FormData;
-    const status = await signIn('credentials', {
-        redirect: false,
-        email: email,
-        password: password,
-    });
-    return status
+
+    try {
+        const { email, password } = FormData;
+        const status = await signIn('credentials', {
+            redirect: false,
+            email: email,
+            password: password,
+        });
+        return status
+    } catch (error) {
+        console.log('error in log_in (service) => ', error);
+    }
+
 }

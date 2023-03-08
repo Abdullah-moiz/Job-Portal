@@ -1,21 +1,21 @@
 import Intro from '@/components/Intro'
 import NavBar from '@/components/NavBar'
-import { useSession } from "next-auth/react"
 import Head from 'next/head'
+import { useSession } from "next-auth/react"
+import { useDispatch } from 'react-redux'
+import { setUserData } from '@/Utils/UserSlice'
 import { useEffect } from 'react'
-import Router from 'next/router'
 
 
 export default function Home() {
-
   const { data: session } = useSession()
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    if(session) {
-      Router.push('/frontend/Dashboard')
+    if (session) {
+      dispatch(setUserData(session?.user))
     }
-  }, [session])
-
+  } ,[session])
 
   return (
     <>

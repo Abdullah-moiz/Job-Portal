@@ -6,15 +6,14 @@ import Link from 'next/link';
 import { logged_in } from '@/Services/auth';
 import Router from 'next/router';
 
+
 export default function Login() {
-
-
-  
   const { data: session } = useSession()
 
   useEffect(() => {
     if(session) {
-      Router.push('/frontend/Dashboard')
+      Router.push('/')
+
     }
   }, [session])
 
@@ -38,11 +37,11 @@ export default function Login() {
       toast.error(res.error);
     }
     else {
-      router.push('/frontend/dashboard');
+      Router.push('/');
     }
-
-
   }
+
+
   return (
     <div className='w-full h-screen bg-indigo-600'>
       <div className="flex flex-col items-center  text-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

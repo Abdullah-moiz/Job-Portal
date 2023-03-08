@@ -8,6 +8,7 @@ import { BiLogOut } from 'react-icons/bi';
 
 export default function NavBar() {
     const user = useSelector(state => state.User.userData)
+
     const [scrolled, isScrolled] = useState(false);
 
     useEffect(() => {
