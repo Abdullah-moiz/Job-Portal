@@ -6,6 +6,14 @@
 #### On Logged In 
 ![image](https://user-images.githubusercontent.com/90745903/223759954-805fffc6-7c23-4018-ac6d-6fbd14953db6.png)
 
+#### login Page
+![image](https://user-images.githubusercontent.com/90745903/223760826-3b23f677-f6f1-4740-9859-a7de7795cd09.png)
+
+
+#### Register Page
+![image](https://user-images.githubusercontent.com/90745903/223760920-30248b2d-d221-4f3b-b5e2-23c685bdde37.png)
+
+
 
 
 
