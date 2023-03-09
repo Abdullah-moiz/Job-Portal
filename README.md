@@ -3,6 +3,18 @@
 ##### Home Page
 ![image](https://user-images.githubusercontent.com/90745903/223309574-3d792dc6-8936-4e0c-93ac-6f5ad476bd45.png)
 
+#### On Logged In 
+![image](https://user-images.githubusercontent.com/90745903/223759954-805fffc6-7c23-4018-ac6d-6fbd14953db6.png)
+
+#### login Page
+![image](https://user-images.githubusercontent.com/90745903/223760826-3b23f677-f6f1-4740-9859-a7de7795cd09.png)
+
+
+#### Register Page
+![image](https://user-images.githubusercontent.com/90745903/223760920-30248b2d-d221-4f3b-b5e2-23c685bdde37.png)
+
+
+
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
