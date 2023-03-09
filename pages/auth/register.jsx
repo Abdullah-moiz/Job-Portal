@@ -1,26 +1,25 @@
 import React, { useState , useEffect } from 'react'
 import Link from 'next/link'
-import { useSession } from "next-auth/react"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { register_me } from '@/Services/auth';
 import { useRouter } from 'next/navigation';
-import Router from 'next/router';
+
 
 export default function  Register (){
-
-
-  const { data: session } = useSession()
-
-  useEffect(() => {
-    if (session) {
-      Router.push('/frontend/dashboard')
-    }
-  }, [session])
-
-
-
   const router = useRouter();
+  
+  useEffect(() => {
+    if (Cookies.get('token')) {
+      router.push('/');
+    }
+  },[router])
+
+
+ 
+
+
+  
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState({ email: "", password: "", name: '' });
 

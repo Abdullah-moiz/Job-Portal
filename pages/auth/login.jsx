@@ -1,21 +1,17 @@
-import React, { useState , useEffect } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
+import React, { useEffect, useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useSession } from "next-auth/react"
 import Link from 'next/link';
-import { logged_in } from '@/Services/auth';
 import Router from 'next/router';
+import { login_me } from '@/Services/auth';
+import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux';
+import { setUserData } from '@/Utils/UserSlice';
 
 
 export default function Login() {
-  const { data: session } = useSession()
+  const dispatch = useDispatch()
 
-  useEffect(() => {
-    if(session) {
-      Router.push('/')
-
-    }
-  }, [session])
 
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState({ email: "", password: "" });
@@ -32,14 +28,26 @@ export default function Login() {
       return;
     }
 
-    const res = await logged_in(formData);
-    if (res.error) {
-      toast.error(res.error);
-    }
-    else {
+    const res = await login_me(formData);
+    console.log(res.finalData?.token)
+    if(res.success)
+    {
+      Cookies.set('token', res.finalData?.token);
+      dispatch(setUserData(res.finalData?.user));
       Router.push('/');
     }
+    else
+    {
+      toast.error(res.message);
+    }
   }
+
+
+  useEffect(() => {
+    if (Cookies.get('token')) {
+      Router.push('/');
+    }
+  },[Router])
 
 
   return (

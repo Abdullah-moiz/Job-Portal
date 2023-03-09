@@ -1,5 +1,4 @@
 import '@/styles/globals.css'
-import { SessionProvider } from "next-auth/react"
 import { store } from '@/Store/store'
 import { Provider } from 'react-redux'
 
@@ -10,9 +9,7 @@ export default function App({
 }) {
   return (
     <Provider store={store}>
-      <SessionProvider session={session}>
-        <Component {...pageProps} />
-      </SessionProvider>
+      <Component {...pageProps} />
     </Provider>
   )
 }

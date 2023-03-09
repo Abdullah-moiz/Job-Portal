@@ -1,21 +1,21 @@
 import Intro from '@/components/Intro'
 import NavBar from '@/components/NavBar'
 import Head from 'next/head'
-import { useSession } from "next-auth/react"
 import { useDispatch } from 'react-redux'
-import { setUserData } from '@/Utils/UserSlice'
+import { setUserToken } from '@/Utils/UserSlice'
 import { useEffect } from 'react'
+import Cookies from 'js-cookie'
 
 
 export default function Home() {
-  const { data: session } = useSession()
-  const dispatch = useDispatch()
+  const dispatch  = useDispatch();
+  const token = Cookies.get('token');
 
   useEffect(() => {
-    if (session) {
-      dispatch(setUserData(session?.user))
+    if (token) {
+      dispatch(setUserToken(token))
     }
-  } ,[session])
+  }, [token])
 
   return (
     <>

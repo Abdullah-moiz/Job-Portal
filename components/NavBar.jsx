@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
-import { signOut } from "next-auth/react"
 import { BiLogOut } from 'react-icons/bi';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 
 
 
 export default function NavBar() {
+    const Router = useRouter();
     const user = useSelector(state => state.User.userData)
+    console.log(user)
 
     const [scrolled, isScrolled] = useState(false);
 
@@ -32,10 +35,9 @@ export default function NavBar() {
 
 
     const handleLogout = async () => {
-        const data = await signOut()
-        if (data) {
-            Router.push('/')
-        }
+        Cookies.remove('token');   
+        Router.reload(); 
+        Router.push('/')
     }
 
     return (
