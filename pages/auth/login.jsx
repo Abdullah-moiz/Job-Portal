@@ -29,11 +29,10 @@ export default function Login() {
     }
 
     const res = await login_me(formData);
-    console.log(res.finalData?.token)
     if(res.success)
     {
-      Cookies.set('token', res.finalData?.token);
-      dispatch(setUserData(res.finalData?.user));
+      Cookies.set('token', res?.finalData?.token);
+      dispatch(setUserData(res?.finalData?.user));
       Router.push('/');
     }
     else
@@ -47,7 +46,7 @@ export default function Login() {
     if (Cookies.get('token')) {
       Router.push('/');
     }
-  },[Router])
+  },[])
 
 
   return (

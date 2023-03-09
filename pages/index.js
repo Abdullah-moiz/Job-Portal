@@ -15,7 +15,7 @@ export default function Home() {
     if (token) {
       dispatch(setUserToken(token))
     }
-  }, [token])
+  }, [token , dispatch])
 
   return (
     <>
