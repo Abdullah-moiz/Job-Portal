@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { register_me } from '@/Services/auth';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 
 export default function  Register (){
