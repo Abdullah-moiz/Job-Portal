@@ -7,6 +7,7 @@ import { login_me } from '@/Services/auth';
 import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '@/Utils/UserSlice';
+import NavBar from '@/components/NavBar';
 
 
 export default function Login() {
@@ -50,6 +51,8 @@ export default function Login() {
 
 
   return (
+    <>
+    <NavBar />
     <div className='w-full h-screen bg-indigo-600'>
       <div className="flex flex-col items-center  text-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -93,5 +96,6 @@ export default function Login() {
       </div>
       <ToastContainer />
     </div>
+    </>
   )
 }

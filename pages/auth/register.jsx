@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { register_me } from '@/Services/auth';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
+import NavBar from '@/components/NavBar';
 
 
 export default function  Register (){
@@ -53,6 +54,8 @@ export default function  Register (){
 
 
   return (
+    <>
+    <NavBar />
     <div className='w-full h-screen bg-indigo-600 '>
       <div className="flex flex-col text-center items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 shadow-xl">
 
@@ -95,5 +98,6 @@ export default function  Register (){
 
       <ToastContainer />
     </div>
+    </>
   )
 }
