@@ -8,7 +8,7 @@ import { get_job } from '@/Services/PostingJob'
 
 export default function DisplayJobs() {
     const [jobs, setJobs] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         (async () => {
