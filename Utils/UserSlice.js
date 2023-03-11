@@ -15,6 +15,7 @@ export const userSlice = createSlice({
     setUserToken : (state, action) => {
         state.userToken = action.payload
     }
+    
   },
 })
 
