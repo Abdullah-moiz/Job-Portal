@@ -33,7 +33,8 @@ export default function Login() {
     if(res.success)
     {
       Cookies.set('token', res?.finalData?.token);
-      dispatch(setUserData(res?.finalData?.user));
+      localStorage.setItem('user', JSON.stringify(res?.finalData?.user));
+      dispatch(setUserData(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null));
       Router.push('/');
     }
     else

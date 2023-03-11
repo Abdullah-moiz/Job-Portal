@@ -1,16 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BiLogOut } from 'react-icons/bi';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { setUserData } from '@/Utils/UserSlice';
 
 
 
 export default function NavBar() {
+    const dispatch = useDispatch();
+
+    
+    useEffect(() => {
+        dispatch(setUserData(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null));
+    }, [dispatch])
+
+
     const Router = useRouter();
     const user = useSelector(state => state.User.userData)
+
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -60,6 +70,7 @@ export default function NavBar() {
 
     const handleLogout = async () => {
         Cookies.remove('token');
+        localStorage.removeItem('user')
         Router.reload();
         Router.push('/')
     }
