@@ -1,5 +1,5 @@
-import { number } from 'joi';
 import mongoose from 'mongoose';
+import User from './User';
 
 const JobSchema = new mongoose.Schema({
 

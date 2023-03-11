@@ -14,3 +14,16 @@ export const post_job = async (formData) => {
         console.log('error in post job (service) => ', error);
     }
 }
+
+
+export const get_job = async () => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/getAllJobs`, {
+            method: 'GET',
+        })
+        const data = res.json();
+        return data;
+    } catch (error) {
+        console.log('error in getting job (service) => ', error);
+    }
+}
