@@ -25,6 +25,9 @@
 #### Post Job
 ![image](https://user-images.githubusercontent.com/90745903/224545025-c678ce5e-94fb-4e64-aa8c-db9be558fa0d.png)
 
+#### View Job 
+![image](https://user-images.githubusercontent.com/90745903/224545051-9072fb38-411c-43f4-8a01-78af4c0a68ff.png)
+
 
 
 
