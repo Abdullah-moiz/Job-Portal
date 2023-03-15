@@ -28,7 +28,7 @@ export default function Home({data}) {
   const JobData = useSelector(state => state.Job.JobData)
 
   useEffect(() => {
-      dispatch(setJobData(data.data))
+      dispatch(setJobData(data?.data))
   }, [dispatch])
 
   useEffect(() => {
