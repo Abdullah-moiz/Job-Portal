@@ -4,9 +4,11 @@ import Image from 'next/image'
 import { BsDot } from 'react-icons/bs'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 
 
 export default function DisplayJobs() {
+    const router =  useRouter();
     const JobData = useSelector(state => state.Job.JobData)
     return (
         <>
@@ -45,7 +47,7 @@ export default function DisplayJobs() {
                                                 <p>Job Title </p>
                                             </div>
                                         </div>
-                                        <button className='my-2 py-2 px-4  border border-indigo-600 uppercase  rounded flex items-center justify-center transition-all duration-700 hover:bg-indigo-600 hover:text-white text-indigo-600 font-semibold'>Apply Now <AiOutlineArrowRight className='mx-2 text-xl' /></button>
+                                        <button onClick={() => router.push(`/frontend/jobDetails/${job?._id}`)} className='my-2 py-2 px-4  border border-indigo-600 uppercase  rounded flex items-center justify-center transition-all duration-700 hover:bg-indigo-600 hover:text-white text-indigo-600 font-semibold'>Apply Now <AiOutlineArrowRight className='mx-2 text-xl' /></button>
                                     </div>
                                 </div>
                             )

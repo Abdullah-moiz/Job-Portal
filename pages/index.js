@@ -6,7 +6,7 @@ import { setUserToken } from '@/Utils/UserSlice'
 import { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import { setJobData } from '@/Utils/JobSlice'
-import { get_job } from '@/Services/PostingJob'
+import { get_job } from '@/Services/job'
 
 
 export async function  getServerSideProps(context) {

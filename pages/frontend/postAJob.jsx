@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { post_job } from '@/Services/PostingJob';
+import { post_job } from '@/Services/job';
 
 export default function PostAJob() {
     const user = useSelector(state => state.User.userData)
