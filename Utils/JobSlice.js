@@ -13,7 +13,7 @@ export const jobSlice = createSlice({
         state.JobData = action.payload
     },
     setMatchingJobDat : (state , action) => {
-      state.matchingData = [...state.matchingData , action.payload]
+      state.matchingData = action.payload
     }
   },
 })
