@@ -9,18 +9,10 @@ import { setJobData } from '@/Utils/JobSlice'
 import { get_job } from '@/Services/job'
 
 
-export async function  getStaticProps(context) {
-  const data = await get_job();
-  return {
-    props: {
-      data
-    },
-  }
-}
 
 
-export default function Home({data}) {
-  
+export default function Home() {
+
 
   const dispatch = useDispatch();
   const token = Cookies.get('token');
@@ -30,7 +22,11 @@ export default function Home({data}) {
   const JobData = useSelector(state => state.Job.JobData)
 
   useEffect(() => {
+    (async () => {
+      const data = await get_job();
       dispatch(setJobData(data?.data))
+    }
+    )()
   }, [dispatch])
 
   useEffect(() => {
