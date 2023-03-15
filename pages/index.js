@@ -9,7 +9,7 @@ import { setJobData } from '@/Utils/JobSlice'
 import { get_job } from '@/Services/job'
 
 
-export async function  getServerSideProps(context) {
+export async function  getStaticProps(context) {
   const data = await get_job();
   return {
     props: {
