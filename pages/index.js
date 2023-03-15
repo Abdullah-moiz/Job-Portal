@@ -20,6 +20,8 @@ export async function  getServerSideProps(context) {
 
 
 export default function Home({data}) {
+  
+
   const dispatch = useDispatch();
   const token = Cookies.get('token');
 
