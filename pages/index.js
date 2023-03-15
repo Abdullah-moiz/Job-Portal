@@ -29,7 +29,7 @@ export default function Home({data}) {
 
   useEffect(() => {
       dispatch(setJobData(data.data))
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     if (JobData?.length > 0) {
