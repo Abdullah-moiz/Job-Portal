@@ -9,14 +9,14 @@ import { post_job } from '@/Services/job';
 export default function PostAJob() {
     const user = useSelector(state => state.User.userData)
 
-    const [formData, setFormData] = useState({ user: user?._id, title: "", salary: 0 , email: "", company: "", description: "", job_category: "", job_type: "", job_experience: "", job_vacancy: 0, job_deadline: "" });
+    const [formData, setFormData] = useState({ user: user?._id, title: "", salary: 0, email: "", company: "", description: "", job_category: "", job_type: "", job_experience: "", job_vacancy: 0, job_deadline: "" });
     const [error, setError] = useState({ user: "", title: "", salary: "", email: "", company: "", description: "", job_category: "", job_type: "", job_experience: "", job_vacancy: "", job_deadline: "" });
 
     const handleSubmit = async (e) => {
 
         e.preventDefault();
 
-        
+
 
         if (!formData.title) {
             setError({ ...error, title: "title Field is required" })
@@ -64,14 +64,14 @@ export default function PostAJob() {
         }
 
         if (formData.user == null) {
-           return toast.error("Please Login First");
+            return toast.error("Please Login First");
         }
 
         const res = await post_job(formData);
-        if(res.success){
+        if (res.success) {
             toast.success(res.message);
         }
-        else{
+        else {
             toast.error(res.message);
         }
     }
@@ -84,6 +84,11 @@ export default function PostAJob() {
         { value: 'internship', label: 'Internship' },
         { value: 'contract', label: 'Contract' },
     ]
+
+  
+
+
+
 
     return (
         <>

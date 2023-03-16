@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 export default function DisplayJobs() {
     const router =  useRouter();
     const JobData = useSelector(state => state.Job.JobData)
+
     return (
         <>
             <NavBar />
@@ -44,10 +45,10 @@ export default function DisplayJobs() {
 
                                         <div className='mb-4 flex  items-start justify-center py-2 flex-col'>
                                             <div className='flex px-6 rounded-2xl py-1 items-center justify-center bg-indigo-200 text-indigo-900  '>
-                                                <p>Job Title </p>
+                                                <p>{job?.title} </p>
                                             </div>
                                         </div>
-                                        <button onClick={() => router.push(`/frontend/jobDetails/${job?._id}`)} className='my-2 py-2 px-4  border border-indigo-600 uppercase  rounded flex items-center justify-center transition-all duration-700 hover:bg-indigo-600 hover:text-white text-indigo-600 font-semibold'>Apply Now <AiOutlineArrowRight className='mx-2 text-xl' /></button>
+                                        <button onClick={() => router.push(`/frontend/jobDetails/${job?._id}`)} className='my-2 py-2 px-4  border border-indigo-600   rounded flex items-center justify-center transition-all duration-700 hover:bg-indigo-600 hover:text-white text-indigo-600 font-semibold'>View Detail <AiOutlineArrowRight className='mx-2 text-xl' /></button>
                                     </div>
                                 </div>
                             )
