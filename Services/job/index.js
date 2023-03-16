@@ -31,7 +31,7 @@ export const get_job = async () => {
 
 export const get_specified_job = async (id) => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/getSpecifiedJob?id=640bf4ae0bb4414104d3c96e`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/getSpecifiedJob?id=${id}`, {
             method: 'GET',
         })
         const data = res.json();
