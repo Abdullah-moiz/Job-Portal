@@ -1,3 +1,4 @@
+import json from "formidable/src/plugins/json";
 
 export const post_job = async (formData) => {
     try {
@@ -38,5 +39,20 @@ export const get_specified_job = async (id) => {
         return data;
     } catch (error) {
         console.log('error in getting  specified job (service) => ', error);
+    }
+}
+
+
+
+export const apply_job = async (formData) => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/applyJob`, {
+            method: 'POST',
+            body: formData,
+        })
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.log('error in apply job (service) => ', error);
     }
 }

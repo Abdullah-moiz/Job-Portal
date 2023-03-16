@@ -72,10 +72,6 @@ export default function Home() {
           </>
         )
       }
-      <NavBar />
-      <div className="w-full h-screen bg-gray-200  text-black">
-        <Intro />
-      </div>
     </>
   )
 }

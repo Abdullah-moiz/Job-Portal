@@ -54,7 +54,8 @@ export default function JobDetails() {
 
 
     const handleApply = () => {
-        if(!user) return toast.error('Please Login First');
+        if (!user) return toast.error('Please Login First');
+        router.push(`/frontend/applyJob/${id}`)
     }
 
 
