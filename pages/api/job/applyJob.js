@@ -1,6 +1,8 @@
 import ConnectDB from '@/DB/connectDB';
 import AppliedJob from '@/models/ApplyJob';
 import Joi from 'joi';
+import fs from 'fs';
+import moment from 'moment'
 
 
 const schema = Joi.object({
@@ -19,10 +21,17 @@ export const config = {
 
 export default async (req, res) => {
     await ConnectDB();
-    console.log('i got hit successfully')
+    
     const data = req.body;
     console.log(JSON.stringify(req.body))
 
+    const timestamp = moment().format('MMMM Do YYYY, h:mm:ss a');
+
+    fs.mkdir(`/public/uploads`, { recursive: true }, (err) => {
+        return res.status('500').json({ success: false, message: "Something Went Wrong Please Retry Later !" })
+    })
+
+    console.log('i got hit successfully')
 
 
     // const { name, email, job, user, about , cv} = data;
