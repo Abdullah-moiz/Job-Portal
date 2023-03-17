@@ -10,8 +10,6 @@ export default async (req, res) => {
     const data = req.query;
     const id = data?.id
 
-    console.log(id)
-
     try {
         const gettingjobs = await Job.findById(id).populate('user');
         return res.status(200).json({ success: true, data: gettingjobs })

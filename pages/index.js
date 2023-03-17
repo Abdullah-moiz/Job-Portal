@@ -1,43 +1,26 @@
 import Intro from '@/components/Intro'
 import NavBar from '@/components/NavBar'
 import Head from 'next/head'
-import { useDispatch, useSelector } from 'react-redux'
-import { setUserToken } from '@/Utils/UserSlice'
-import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setUserToken  , setUserData} from '@/Utils/UserSlice'
+import { useEffect } from 'react'
 import Cookies from 'js-cookie'
-import { setJobData } from '@/Utils/JobSlice'
-import { get_job } from '@/Services/job'
-
 
 
 
 export default function Home() {
-
-
   const dispatch = useDispatch();
   const token = Cookies.get('token');
-
-
-  const [loading, setLoading] = useState(true);
-  const JobData = useSelector(state => state.Job.JobData)
-
-  useEffect(() => {
-    (async () => {
-      const data = await get_job();
-      dispatch(setJobData(data?.data))
-    }
-    )()
-  }, [dispatch])
-
-  useEffect(() => {
-    if (JobData?.length > 0) {
-      setLoading(false)
-    }
-  }, [JobData])
+  console.log(token)
 
   useEffect(() => {
     if (token) {
       dispatch(setUserToken(token))
+    }
+    else
+    {
+      localStorage.removeItem('user')
+      dispatch(setUserData(null))
     }
   }, [token, dispatch])
 
@@ -58,20 +41,11 @@ export default function Home() {
         <meta name="twitter:title" content="Find Your Dream Job | Job Portal Name" />
         <meta name="language" content="en-US" />
       </Head>
-      {
-        loading ? (
-          <div className='w-full h-screen flex bg-indigo-600 items-center justify-center'>
-            <div className='w-32 h-32 rounded-full animate-bounce flex items-center justify-center text-xl px-2 py-2 bg-white  text-indigo-600'>Loading...</div>
-          </div>
-        ) : (
-          <>
-            <NavBar />
-            <div className="w-full h-screen bg-gray-200  text-black">
-              <Intro />
-            </div>
-          </>
-        )
-      }
+
+      <NavBar />
+      <div className="w-full h-screen bg-gray-200  text-black">
+        <Intro />
+      </div>
     </>
   )
 }

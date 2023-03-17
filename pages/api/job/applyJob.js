@@ -11,17 +11,24 @@ const schema = Joi.object({
     user: Joi.string().required(),
 });
 
-
+export const config = {
+    api: {
+        bodyParser: false,
+    }
+};
 
 export default async (req, res) => {
     await ConnectDB();
-
+    console.log('i got hit successfully')
     const data = req.body;
-    const { name, email, job, user, about} = data;
-    const { error } = schema.validate({ name, email, job, user, about , cv });
+    console.log(JSON.stringify(req.body))
 
-    console.log(data)
-    if (error) return res.status(401).json({ success: false, message: error.details[0].message.replace(/['"]+/g, '') });
+
+
+    // const { name, email, job, user, about , cv} = data;
+    // const { error } = schema.validate({ name, email, job, user, about});
+
+    // if (error) return res.status(401).json({ success: false, message: error.details[0].message.replace(/['"]+/g, '') });
 
 
     // try {

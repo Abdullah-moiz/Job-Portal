@@ -50,11 +50,11 @@ export default function ApplyJob() {
         console.log(formData)
 
         const res = await apply_job(formData);
-        if (res.success) {
-            toast.success(res.message)
-        } else {
-            toast.error(res.message)
-        }
+        // if (res.success) {
+        //     toast.success(res.message)
+        // } else {
+        //     toast.error(res.message)
+        // }
 
     }
 
