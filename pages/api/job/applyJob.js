@@ -13,23 +13,20 @@ const schema = Joi.object({
     user: Joi.string().required(),
 });
 
-export const config = {
-    api: {
-        bodyParser: false,
-    }
-};
+// export const config = {
+//     api: {
+//         bodyParser: false,
+//     }
+// };
 
 export default async (req, res) => {
     await ConnectDB();
     
     const data = req.body;
-    console.log(JSON.stringify(req.body))
+    console.log(data)
+    // const cv =  req.files.cv;
+    // console.log(cv)
 
-    const timestamp = moment().format('MMMM Do YYYY, h:mm:ss a');
-
-    fs.mkdir(`/public/uploads`, { recursive: true }, (err) => {
-        return res.status('500').json({ success: false, message: "Something Went Wrong Please Retry Later !" })
-    })
 
     console.log('i got hit successfully')
 
