@@ -3,6 +3,7 @@ import AppliedJob from '@/models/ApplyJob';
 import Joi from 'joi';
 import fs from 'fs';
 import moment from 'moment'
+import formidable from "formidable";
 
 
 const schema = Joi.object({
@@ -13,17 +14,20 @@ const schema = Joi.object({
     user: Joi.string().required(),
 });
 
-// export const config = {
-//     api: {
-//         bodyParser: false,
-//     }
-// };
+export const config = {
+    api: {
+        bodyParser: false,
+    },
+};
+
 
 export default async (req, res) => {
     await ConnectDB();
-    
-    const data = req.body;
-    console.log(data)
+
+    console.log(req.body)
+
+    // const data = req.body;
+    // console.log(data)
     // const cv =  req.files.cv;
     // console.log(cv)
 

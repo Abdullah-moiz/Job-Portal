@@ -11,7 +11,6 @@ import Cookies from 'js-cookie'
 export default function Home() {
   const dispatch = useDispatch();
   const token = Cookies.get('token');
-  console.log(token)
 
   useEffect(() => {
     if (token) {

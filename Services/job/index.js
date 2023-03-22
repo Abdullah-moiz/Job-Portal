@@ -46,15 +46,11 @@ export const get_specified_job = async (id) => {
 
 
 export const apply_job = async (formData) => {
-    const { name, email, about, job, user, cv } = formData
-    
+   console.log(formData)
 
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/applyJob`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
             body: formData,
         });
         const data = await res.json();
