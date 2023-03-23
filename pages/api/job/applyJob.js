@@ -1,9 +1,7 @@
 import ConnectDB from '@/DB/connectDB';
 import AppliedJob from '@/models/ApplyJob';
 import Joi from 'joi';
-import fs from 'fs';
-import moment from 'moment'
-import formidable from "formidable";
+import busboy from 'busboy';
 
 
 const schema = Joi.object({
@@ -24,29 +22,31 @@ export const config = {
 export default async (req, res) => {
     await ConnectDB();
 
-    console.log(req.body)
+    const bb = busboy({ headers: req.headers });
+    bb.on('file', (name, file, info) => {
+        const { filename, encoding, mimeType } = info;
+        console.log(
+            `File [${name}]: filename: %j, encoding: %j, mimeType: %j`,
+            filename,
+            encoding,
+            mimeType
+        );
+        file.on('data', (data) => {
+            console.log(`File [${name}] got ${data.length} bytes`);
+        }).on('close', () => {
+            console.log(`File [${name}] done`);
+        });
+    });
+    bb.on('field', (name, val, info) => {
+        console.log(`Field [${name}]: value: %j`, val);
+    });
+    bb.on('close', () => {
+        console.log('Done parsing form!');
+        res.writeHead(303, { Connection: 'close' });
+        res.end();
+    });
+    req.pipe(bb);
 
-    // const data = req.body;
-    // console.log(data)
-    // const cv =  req.files.cv;
-    // console.log(cv)
 
-
-    console.log('i got hit successfully')
-
-
-    // const { name, email, job, user, about , cv} = data;
-    // const { error } = schema.validate({ name, email, job, user, about});
-
-    // if (error) return res.status(401).json({ success: false, message: error.details[0].message.replace(/['"]+/g, '') });
-
-
-    // try {
-    //     const creatingUser =  await AppliedJob.create({user , title,description , salary , company , email , job_category , job_type , job_experience , job_vacancy , job_deadline });
-    //     return res.status(200).json({ success: true, message: "Job Posted Successfully !" })
-    // } catch (error) {
-    //     console.log('Error in posting a job (server) => ', error);
-    //     return res.status(500).json({ success: false, message: "Something Went Wrong Please Retry Later !" })
-    // }
 }
 

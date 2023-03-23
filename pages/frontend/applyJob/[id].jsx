@@ -11,7 +11,8 @@ export default function ApplyJob() {
     const dispatch = useDispatch();
     const { id } = router.query
     const activeUser = useSelector(state => state.User.userData)
-    const [formikData, setFormikData] = useState({ name: '', email: "", about: '', job: id, user: activeUser?._id, cv: null })
+    const [formikData, setFormikData] = useState({ name: '', email: "", about: '', job: id, user: activeUser?._id })
+    const [file , setFile] = useState(null)
     const [error, setError] = useState({ name: '', email: "", about: '', job: '', user: '', cv: '' });
 
 
@@ -21,19 +22,6 @@ export default function ApplyJob() {
 
         e.preventDefault();
 
-        console.log(formikData)
-
-        const form = new FormData();
-        form.append('name', name);
-        form.append('email', email);
-        form.append('about', about);
-        form.append('job', job);
-        form.append('user', user);
-        form.append('cv', cv);
-        
-        for (const [key, value] of form.entries()) {
-          console.log(`${key}: ${value}`);
-        }
 
 
         if (!name) {
@@ -59,15 +47,31 @@ export default function ApplyJob() {
             return;
         }
 
-        if (!cv) {
+        if (!file) {
             setError({ ...error, cv: "Please Upload CV" })
             return;
         }
 
+        
+
+        const form = new FormData();
+        form.append('name', name);
+        form.append('email', email);
+        form.append('about', about);
+        form.append('job', job);
+        form.append('user', user);
+        form.append('cv', file);
+
+
+        console.log(file)
+
+        console.log(form)
+
+
+
         const res = await apply_job(form);
         if (res.success) {
             toast.success('Your Application is Submitted')
-            router.push('/frontend/displayJobs')
         } else {
             toast.error('Something Went Wrong')
         }
@@ -105,7 +109,7 @@ export default function ApplyJob() {
                     </div>
                     <div className='w-full mb-4  flex flex-col items-start justify-center'>
                         <label htmlFor="file" className='mb-1 text-base font-semibold'>Upload CV :</label>
-                        <input name='cv' onChange={(e) => setFormikData({ ...formikData, cv: e.target.files[0] })} type="file" id='file' className='w-full py-2 px-3 mb-2 border border-indigo-600 rounded' placeholder='Enter Email' />
+                        <input name='cv' onChange={(e) => setFile(e.target.files[0])} type="file" id='file' className='w-full py-2 px-3 mb-2 border border-indigo-600 rounded' placeholder='Enter Email' />
                         {
                             error.cv && <p className="text-sm text-red-500">{error.cv}</p>
                         }

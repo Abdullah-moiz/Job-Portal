@@ -12,6 +12,7 @@
     "@next/font": "13.2.3",
     "@reduxjs/toolkit": "^1.9.3",
     "bcryptjs": "^2.4.3",
+    "busboy": "^1.6.0",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
     "formidable": "^2.1.1",
