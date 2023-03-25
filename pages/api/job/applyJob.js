@@ -3,7 +3,9 @@ import Joi from 'joi';
 import AppliedJob from '@/models/ApplyJob';
 import formidable from 'formidable';
 import fs from 'fs';
+import os from 'os';
 import path from 'path'
+import crypto from 'crypto';
 
 const schema = Joi.object({
     name: Joi.string().required(),
@@ -28,19 +30,37 @@ export default async (req, res) => {
 
     try {
         const form = new formidable.IncomingForm();
-        form.parse(req, (err, fields, files) => {
+        form.parse(req, async (err, fields, files) => {
             if (err) {
                 console.error('Error', err)
                 throw err
             }
+
             const oldPath = files.cv.filepath;
-            console.log(oldPath)
-            const fileName = files.cv.originalFilename;
-            console.log(fileName)
+            const originalFileName  = files.cv.originalFilename
             
-            const tempPath = path.join(process.cwd(), 'public', 'uploads', fileName + '.temp');
-            fs.renameSync(oldPath, tempPath);
-            fs.renameSync(tempPath, newPath);
+
+
+            const fileExtension = path.extname(originalFileName);
+            const randomString = crypto.randomBytes(6).toString('hex');
+            const fileName = `${originalFileName.replace(fileExtension, '')}_${randomString}${fileExtension}`;
+
+
+            const newPath = path.join(process.cwd(), 'public', 'uploads', fileName);
+
+
+            // Read the file
+            fs.readFile(oldPath, function (err, data) {
+                if (err) throw err;
+                fs.writeFile(newPath, data, function (err) {
+                    if (err) throw err;
+                });
+                fs.unlink(oldPath, function (err) {
+                    if (err) throw err;
+                });
+            });
+
+
 
 
             const jobApplication = {
@@ -54,8 +74,9 @@ export default async (req, res) => {
 
             console.log(jobApplication)
 
-            const { error } = schema.validate(jobApplication);
-            if (error) return res.status(401).json({ success: false, message: error.details[0].message.replace(/['"]+/g, '') });
+
+            // const { error } = schema.validate(jobApplication);
+            // if (error) return res.status(401).json({ success: false, message: error.details[0].message.replace(/['"]+/g, '') });
 
             const newJobApplication = AppliedJob.create(jobApplication);
             return res.status(200).json({ success: true, message: 'Job application submitted successfully' });
