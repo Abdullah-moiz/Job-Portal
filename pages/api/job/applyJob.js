@@ -1,8 +1,9 @@
 import ConnectDB from '@/DB/connectDB';
-import AppliedJob from '@/models/ApplyJob';
 import Joi from 'joi';
-import busboy from 'busboy';
-
+import AppliedJob from '@/models/ApplyJob';
+import formidable from 'formidable';
+import fs from 'fs';
+import path from 'path'
 
 const schema = Joi.object({
     name: Joi.string().required(),
@@ -19,33 +20,58 @@ export const config = {
 };
 
 
+
+
 export default async (req, res) => {
     await ConnectDB();
 
-    const bb = busboy({ headers: req.headers });
-    bb.on('file', (name, file, info) => {
-        const { filename, encoding, mimeType } = info;
-        console.log(
-            `File [${name}]: filename: %j, encoding: %j, mimeType: %j`,
-            filename,
-            encoding,
-            mimeType
-        );
-        file.on('data', (data) => {
-            console.log(`File [${name}] got ${data.length} bytes`);
-        }).on('close', () => {
-            console.log(`File [${name}] done`);
-        });
-    });
-    bb.on('field', (name, val, info) => {
-        console.log(`Field [${name}]: value: %j`, val);
-    });
-    bb.on('close', () => {
-        console.log('Done parsing form!');
-        res.writeHead(303, { Connection: 'close' });
-        res.end();
-    });
-    req.pipe(bb);
+
+    try {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields, files) => {
+            if (err) {
+                console.error('Error', err)
+                throw err
+            }
+            const oldPath = files.cv.filepath;
+            console.log(oldPath)
+            const fileName = files.cv.originalFilename;
+            console.log(fileName)
+            
+            const tempPath = path.join(process.cwd(), 'public', 'uploads', fileName + '.temp');
+            fs.renameSync(oldPath, tempPath);
+            fs.renameSync(tempPath, newPath);
+
+
+            const jobApplication = {
+                name: fields.name,
+                email: fields.email,
+                about: fields.about,
+                job: fields.job,
+                user: fields.user,
+                cv: fileName,
+            };
+
+            console.log(jobApplication)
+
+            const { error } = schema.validate(jobApplication);
+            if (error) return res.status(401).json({ success: false, message: error.details[0].message.replace(/['"]+/g, '') });
+
+            const newJobApplication = AppliedJob.create(jobApplication);
+            return res.status(200).json({ success: true, message: 'Job application submitted successfully' });
+
+
+        })
+    } catch (error) {
+
+        console.log('error in apply job (server) => ', error);
+        return res.status(500).json({ success: false, message: 'something went wrong' });
+    }
+
+
+
+
+
 
 
 }

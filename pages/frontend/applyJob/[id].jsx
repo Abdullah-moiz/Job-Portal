@@ -16,7 +16,7 @@ export default function ApplyJob() {
     const [error, setError] = useState({ name: '', email: "", about: '', job: '', user: '', cv: '' });
 
 
-    const { name, email, about, job, user, cv } = formikData;
+    const { name, email, about, job, user} = formikData;
 
     const handleSubmit = async (e) => {
 
@@ -63,12 +63,6 @@ export default function ApplyJob() {
         form.append('cv', file);
 
 
-        console.log(file)
-
-        console.log(form)
-
-
-
         const res = await apply_job(form);
         if (res.success) {
             toast.success('Your Application is Submitted')
@@ -109,7 +103,7 @@ export default function ApplyJob() {
                     </div>
                     <div className='w-full mb-4  flex flex-col items-start justify-center'>
                         <label htmlFor="file" className='mb-1 text-base font-semibold'>Upload CV :</label>
-                        <input name='cv' onChange={(e) => setFile(e.target.files[0])} type="file" id='file' className='w-full py-2 px-3 mb-2 border border-indigo-600 rounded' placeholder='Enter Email' />
+                        <input  name='cv' onChange={(e) => setFile(e.target.files[0])} type="file" id='file' className='w-full py-2 px-3 mb-2 border border-indigo-600 rounded' placeholder='Enter Email' />
                         {
                             error.cv && <p className="text-sm text-red-500">{error.cv}</p>
                         }
