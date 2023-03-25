@@ -72,11 +72,11 @@ export default async (req, res) => {
                 cv: fileName,
             };
 
-            console.log(jobApplication)
+            const {name , email , about , job , user} = jobApplication;
 
 
-            // const { error } = schema.validate(jobApplication);
-            // if (error) return res.status(401).json({ success: false, message: error.details[0].message.replace(/['"]+/g, '') });
+            const { error } = schema.validate({name , email , about , job , user});
+            if (error) return res.status(401).json({ success: false, message: error.details[0].message.replace(/['"]+/g, '') });
 
             const newJobApplication = AppliedJob.create(jobApplication);
             return res.status(200).json({ success: true, message: 'Job application submitted successfully' });
