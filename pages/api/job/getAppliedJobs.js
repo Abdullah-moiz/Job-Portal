@@ -10,6 +10,8 @@ export default async (req, res) => {
     await ConnectDB();
 
     const userId = req.query.id;
+    
+    if(!userId) return res.status(400).json({ success: false, message: "Please Login" })
 
     try {
         const gettingAppliedJobs  = await ApplyJob.find({user : userId}).populate('user').populate('job');

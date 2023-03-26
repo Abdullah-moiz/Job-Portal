@@ -14,7 +14,7 @@ export default function Dashboard() {
   const [showTable, setShowTable] = useState('appliedJobs')
   const router = useRouter();
   const dispatch = useDispatch();
-  
+
   const activeUser = useSelector(state => state?.User?.userData)
   const id = activeUser?._id
 
@@ -26,18 +26,23 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchAppliedJobs()
-  } , [])
+  }, [])
 
 
   const fetchAppliedJobs = async () => {
     const res = await get_my_applied_job(id)
-    dispatch(setAppliedJob(res?.data))
+    if (res.success) {
+      dispatch(setAppliedJob(res?.data))
+    }
+    else {
+      router.push('/auth/login')
+    }
   }
 
 
 
 
-  
+
 
 
   return (

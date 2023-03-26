@@ -1,8 +1,10 @@
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import { useSelector } from 'react-redux';
 
 export default function AppliedJobDataTable() {
+    const router  = useRouter();
     const appliedJobData = useSelector(state => state.AppliedJob.appliedJob)
 
     const [Data, setData] = useState([]);
@@ -40,7 +42,7 @@ export default function AppliedJobDataTable() {
         },
         {
             name: 'Action',
-            cell: row => <button onClick={() => navigate(`appliedJobDetails/${row._id}`)} className='md:px-2 md:py-2 px-1 py-1 text-xs text-indigo-600 hover:text-white my-2 hover:bg-indigo-600 border border-indigo-600   rounded transition-all duration-700  '>view Detail</button>
+            cell: row => <button onClick={() => router.push(`appliedJobDetails/${row._id}`)} className='md:px-2 md:py-2 px-1 py-1 text-xs text-indigo-600 hover:text-white my-2 hover:bg-indigo-600 border border-indigo-600   rounded transition-all duration-700  '>view Detail</button>
         },
     ];
 
@@ -69,7 +71,7 @@ export default function AppliedJobDataTable() {
             data={filteredData}
             keyField="id"
             pagination
-            title={`Total Applied Jobs: ${Data.length}`}
+            title={`Total Applied Jobs: ${Data?.length}`}
             fixedHeader
             fixedHeaderScrollHeight='79%'
             selectableRows
