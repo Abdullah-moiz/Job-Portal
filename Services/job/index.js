@@ -60,9 +60,9 @@ export const apply_job = async (formData) => {
 
 
 
-export const get_my_applied_job = async (formData) => {
+export const get_my_applied_job = async (id) => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/getSpecifiedJob?id=${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/getAppliedJobs?id=${id}`, {
             method: 'GET',
         })
         const data = res.json();

@@ -1,33 +1,43 @@
 import AppliedJobDataTable from '@/components/AppliedJobDataTable'
 import NavBar from '@/components/NavBar'
 import SavedJobDataTable from '@/components/SavedJobDataTable'
+import { get_my_applied_job } from '@/Services/job'
+import { setAppliedJob } from '@/Utils/AppliedJobSlice'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { BsFillBookmarkStarFill } from 'react-icons/bs'
 import { GiSuitcase } from 'react-icons/gi'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function Dashboard() {
+  const [showTable, setShowTable] = useState('appliedJobs')
   const router = useRouter();
+  const dispatch = useDispatch();
+  
+  const activeUser = useSelector(state => state?.User?.userData)
+  const id = activeUser?._id
 
   useEffect(() => {
     if (!activeUser || !Cookies.get('token')) {
       router.push('/auth/login')
     }
-  }, [])
+  }, [activeUser])
+
+  useEffect(() => {
+    fetchAppliedJobs()
+  } , [])
 
 
+  const fetchAppliedJobs = async () => {
+    const res = await get_my_applied_job(id)
+    dispatch(setAppliedJob(res?.data))
+  }
 
-  const activeUser = useSelector(state => state?.User?.userData)
+
 
 
   
-
-
-
-
-  const [showTable, setShowTable] = useState('appliedJobs')
 
 
   return (
@@ -55,7 +65,7 @@ export default function Dashboard() {
 
           {/* applied Jobs */}
         </div>
-        <div className='w-full h-full bg-red-600 px-4 '>
+        <div className='w-full h-full px-4 '>
           {
             showTable === 'savedJobs' ? <SavedJobDataTable /> : <AppliedJobDataTable />
           }
