@@ -57,3 +57,17 @@ export const apply_job = async (formData) => {
         console.log('error in apply job (service) => ', error);
     }
 }
+
+
+
+export const get_my_applied_job = async (formData) => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/getSpecifiedJob?id=${id}`, {
+            method: 'GET',
+        })
+        const data = res.json();
+        return data;
+    } catch (error) {
+        console.log('error in getting  getting my all job (service) => ', error);
+    }
+}
