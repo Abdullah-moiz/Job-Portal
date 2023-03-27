@@ -65,10 +65,10 @@ export default function JobDetails() {
         <>
             {
                 JobDetails === null || JobDetails === undefined ? (
-                    <div className='bg-gray w-full h-screen flex items-center justify-center'>
-                        <InfinitySpin width='200' color="#4f46e5" />
-                        <p className='text-sm uppercase'>Loading Resources Hold Tight</p>
-                    </div>
+                    <div className='bg-gray w-full h-screen flex items-center flex-col justify-center'>
+                    <InfinitySpin width='200' color="#4f46e5" />
+                    <p className='text-xs uppercase'>Loading Resources Hold Tight...</p>
+                </div>
                 ) : (
                     <>
                         <ToastContainer />
