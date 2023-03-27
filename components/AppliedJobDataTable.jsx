@@ -13,7 +13,7 @@ export default function AppliedJobDataTable() {
 
     useEffect(() => {
         setData(appliedJobData)
-    }, [appliedJobData])
+    }, [])
 
     const [search, setSearch] = useState('');
     const [filteredData, setFilteredData] = useState([]);

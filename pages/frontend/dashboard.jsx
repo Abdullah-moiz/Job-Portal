@@ -10,6 +10,8 @@ import { BsFillBookmarkStarFill } from 'react-icons/bs'
 import { GiSuitcase } from 'react-icons/gi'
 import { useDispatch, useSelector } from 'react-redux'
 
+
+
 export default function Dashboard() {
   const [showTable, setShowTable] = useState('appliedJobs')
   const router = useRouter();
@@ -19,10 +21,10 @@ export default function Dashboard() {
   const id = activeUser?._id
 
   useEffect(() => {
-    if (!activeUser || !Cookies.get('token')) {
+    if (!id || !Cookies.get('token')) {
       router.push('/auth/login')
     }
-  }, [activeUser])
+  }, [activeUser , id , Cookies])
 
   useEffect(() => {
     fetchAppliedJobs()
@@ -38,11 +40,6 @@ export default function Dashboard() {
       router.push('/auth/login')
     }
   }
-
-
-
-
-
 
 
   return (
