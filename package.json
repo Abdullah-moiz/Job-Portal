@@ -30,6 +30,7 @@
     "react-data-table-component": "^7.5.3",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
+    "react-loader-spinner": "^5.3.4",
     "react-multi-input": "^1.0.0",
     "react-redux": "^8.0.5",
     "react-select": "^5.7.0",

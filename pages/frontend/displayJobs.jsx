@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { get_job } from '@/Services/job'
 import { setJobData } from '@/Utils/JobSlice'
+import { InfinitySpin } from 'react-loader-spinner'
 
 
 
@@ -42,8 +43,9 @@ export default function DisplayJobs() {
         <>
             {
                 loading ? (
-                    <div className='w-full h-screen flex bg-indigo-600 items-center justify-center'>
-                        <div className='w-32 h-32 rounded-full animate-bounce flex items-center justify-center text-xl px-2 py-2 bg-white  text-indigo-600'>Loading...</div>
+                    <div className='bg-gray w-full h-screen flex items-center justify-center'>
+                        <InfinitySpin width='200' color="#4f46e5" />
+                        <p className='text-sm uppercase'>Loading Resources Hold Tight</p>
                     </div>
                 ) : (
                     <>
