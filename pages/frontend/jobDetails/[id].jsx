@@ -129,7 +129,7 @@ export default function JobDetails() {
                                     <div className='flex items-center justify-center'>
                                         {
                                             JobDetails?.user?.email  === user?.email ? (
-                                                <p>Can't Apply to your Own jobs</p>
+                                                <p className='text-xs text-red-500'>unable Apply to your Own jobs</p>
                                             ) : (
 
                                                 <button onClick={handleApply} className='md:px-6 md:py-3 px-3 py-2 mt-2 md:mt-0 bg-indigo-500 rounded text-base tracking-widest uppercase transition-all duration-700 hover:bg-indigo-900 text-white  '>Apply Position</button>
