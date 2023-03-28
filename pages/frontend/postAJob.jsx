@@ -5,9 +5,12 @@ import { useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { post_job } from '@/Services/job';
+import { useRouter } from 'next/router'
+
 
 export default function PostAJob() {
     const user = useSelector(state => state.User.userData)
+    const router = useRouter();
 
     const [formData, setFormData] = useState({ user: user?._id, title: "", salary: 0, email: "", company: "", description: "", job_category: "", job_type: "", job_experience: "", job_vacancy: 0, job_deadline: "" });
     const [error, setError] = useState({ user: "", title: "", salary: "", email: "", company: "", description: "", job_category: "", job_type: "", job_experience: "", job_vacancy: "", job_deadline: "" });
@@ -70,6 +73,9 @@ export default function PostAJob() {
         const res = await post_job(formData);
         if (res.success) {
             toast.success(res.message);
+            setTimeout(() => {
+                router.push('/frontend/displayJobs')
+            }, 1000)
         }
         else {
             toast.error(res.message);
@@ -85,7 +91,7 @@ export default function PostAJob() {
         { value: 'contract', label: 'Contract' },
     ]
 
-  
+
 
 
 

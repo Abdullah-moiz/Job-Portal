@@ -25,13 +25,14 @@ export default function DisplayJobs() {
         )()
     }, [])
 
-    
+
 
 
 
     const [loading, setLoading] = useState(true);
     const JobData = useSelector(state => state.Job.JobData)
-
+   
+  
     useEffect(() => {
         if (JobData?.length > 0) {
             setLoading(false)
