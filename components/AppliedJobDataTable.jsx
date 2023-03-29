@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import { useSelector } from 'react-redux';
-import { InfinitySpin } from 'react-loader-spinner'
 
 export default function AppliedJobDataTable() {
     const router = useRouter();
