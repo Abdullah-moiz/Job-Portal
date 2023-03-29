@@ -30,9 +30,6 @@ export default function JobDetails() {
     const [JobDetails, setJobDetails] = useState(null);
 
 
-    console.log(user)
-    console.log(JobDetails)
-
     useEffect(() => {
         (async () => {
             const res = await get_specified_job(id);
@@ -51,7 +48,7 @@ export default function JobDetails() {
     useEffect(() => {
         if (JobDetails) {
 
-            const filteredJobData = JobData.filter((job) => job.job_category === JobDetails?.job_category)
+            const filteredJobData = JobData?.filter((job) => job.job_category === JobDetails?.job_category)
             dispatch(setMatchingJobDat(filteredJobData))
 
         }
@@ -146,7 +143,7 @@ export default function JobDetails() {
                                             JobDetails?.user?.email === user?.email ? (
                                                 <p className='text-xs text-red-500'>unable Apply to your Own jobs</p>
                                             ) : (
-                                                <div className='flex items-center justify-center px-2 py-2 '>
+                                                <div className='flex items-center justify-center  '>
                                                     <BsFillBookmarkCheckFill onClick={handleBookMark} className='text-indigo-600 text-4xl cursor-pointer  mx-2'/>
                                                     <button onClick={handleApply} className='md:px-6 md:py-3 px-3 py-2 mt-2 md:mt-0 bg-indigo-500 rounded text-base tracking-widest uppercase transition-all duration-700 hover:bg-indigo-900 text-white  '>Apply Position</button>
                                                 </div>

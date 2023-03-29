@@ -2,7 +2,8 @@ import AppliedJobDataTable from '@/components/AppliedJobDataTable'
 import NavBar from '@/components/NavBar'
 import SavedJobDataTable from '@/components/SavedJobDataTable'
 import { get_my_applied_job } from '@/Services/job'
-import { setAppliedJob } from '@/Utils/AppliedJobSlice'
+import { get_book_mark_job } from '@/Services/job/bookmark'
+import { setAppliedJob, setBookMark } from '@/Utils/AppliedJobSlice'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -10,6 +11,7 @@ import { BsFillBookmarkStarFill } from 'react-icons/bs'
 import { GiSuitcase } from 'react-icons/gi'
 import { InfinitySpin } from 'react-loader-spinner'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 
 
@@ -34,9 +36,14 @@ export default function Dashboard() {
 
 
   const fetchAppliedJobs = async () => {
+
     const res = await get_my_applied_job(id)
-    if (res.success) {
+    const get_bookmarks =   await get_book_mark_job(id)
+    if (res.success || get_bookmarks.success) {
+
+      console.log(get_bookmarks)
       dispatch(setAppliedJob(res?.data))
+      dispatch(setBookMark(get_bookmarks?.data))
       setLoading(false)
     }
     else {
