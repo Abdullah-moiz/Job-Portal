@@ -76,7 +76,7 @@ export default function SavedJobDataTable() {
                             data={filteredData}
                             keyField="id"
                             pagination
-                            title={`Total Applied Jobs: ${Data?.length}`}
+                            title={`Total Saved Jobs: ${Data?.length}`}
                             fixedHeader
                             fixedHeaderScrollHeight='79%'
                             selectableRows

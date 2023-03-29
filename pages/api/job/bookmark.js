@@ -32,7 +32,7 @@ export const  bookmark_my_job = async (req, res) => {
     await ConnectDB();
     const data = req.body;
     const { job , user } = data;
-    console.log(data)
+    
     const { error } = schema.validate({job , user});
 
     if (error) return res.status(401).json({ success: false, message: error.details[0].message.replace(/['"]+/g, '') });
