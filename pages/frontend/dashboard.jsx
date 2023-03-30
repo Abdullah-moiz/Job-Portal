@@ -40,8 +40,6 @@ export default function Dashboard() {
     const res = await get_my_applied_job(id)
     const get_bookmarks =   await get_book_mark_job(id)
     if (res.success || get_bookmarks.success) {
-
-      console.log(get_bookmarks)
       dispatch(setAppliedJob(res?.data))
       dispatch(setBookMark(get_bookmarks?.data))
       setLoading(false)

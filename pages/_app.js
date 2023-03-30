@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Cookies from 'js-cookie';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 

@@ -19,7 +19,7 @@ export default async (req, res) => {
             await getBookmark_jobs(req , res)
             break;
         case "DELETE":
-            
+            await delete_bookmark_job(req , res)
             break;
         default:
             return res.status(405).end(`Method ${req.method} Not Allowed`)
@@ -59,6 +59,21 @@ export const getBookmark_jobs = async ( req , res) => {
         return res.status(200).json({ success: true, message: "Job Bookmarked successfully !"  , data : getBookMark})
     } catch (error) {
         console.log('Error in getting book mark Job (server) => ', error);
+        return res.status(500).json({ success: false, message: "Something Went Wrong Please Retry Later !" })
+    }
+}
+
+
+
+export const delete_bookmark_job = async ( req , res) => {
+    const id = req.body;
+    if(!id) return res.status(400).json({ success: false, message: "Please Login" })
+    try {
+        
+        const deleteBookmark = await bookMarkJob.findByIdAndDelete(id)
+        return res.status(200).json({ success: true, message: "Job removed successfully !"  })
+    } catch (error) {
+        console.log('Error in deleting book mark Job (server) => ', error);
         return res.status(500).json({ success: false, message: "Something Went Wrong Please Retry Later !" })
     }
 }
