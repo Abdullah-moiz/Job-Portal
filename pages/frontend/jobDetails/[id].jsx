@@ -49,7 +49,8 @@ export default function JobDetails() {
         if (JobDetails) {
 
             const filteredJobData = JobData?.filter((job) => job.job_category === JobDetails?.job_category)
-            dispatch(setMatchingJobDat(filteredJobData))
+            const filteredJobData2 = filteredJobData?.filter((job) => job._id !== JobDetails?._id)
+            dispatch(setMatchingJobDat(filteredJobData2))
 
         }
     }, [JobDetails, JobData, dispatch])
@@ -180,7 +181,16 @@ export default function JobDetails() {
                                 <h1 className='text-xl font-semibold lg:text-2xl '>Related Jobs</h1>
                                 <div className='md:px-8 px-2 md:mx-4 flex flex-wrap items-center justify-center'>
                                     {/* card */}
+
                                     {
+                                        machingData?.length === 0 ? (
+                                            <>
+                                                <div className='md:w-96 w-full py-3 mx-4 my-2 flex items-center md:items-start px-6 justify-start md:justify-center flex-col rounded bg-gray-50'>
+                                                    <p  className='text-xs font-semibold text-red-600 uppercase'>No Other similar Jobs Available ...</p>
+                                                </div>
+
+                                            </> 
+                                        ) : (
                                         machingData?.map((item) => {
                                             return (
                                                 <div key={item?._id} className='md:w-96 w-full py-3 mx-4 my-2 flex items-center md:items-start px-6 justify-start md:justify-center flex-col rounded bg-gray-50'>
@@ -217,6 +227,7 @@ export default function JobDetails() {
                                                 </div>
                                             )
                                         })
+                                        )
                                     }
 
                                     {/* card */}
