@@ -18,7 +18,7 @@
 - Track Your Applied Jobs in DataTable View 
 - Track Your Posted Jobs and view Submitted Application ( currently underProgress)
 - Accept and Reject Different Application ( Comming Soon )
-- Status Updated for applied Job based on Job poster action 
+- Status Updated for applied Job based on Job poster action  (comming soon)
 
 
 
