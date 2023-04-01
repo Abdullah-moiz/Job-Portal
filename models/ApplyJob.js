@@ -4,11 +4,11 @@ import Job from './Job';
 
 const ApplyJobSchema = new mongoose.Schema({
 
-    user : {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    job : {
+    job: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Job',
     },
@@ -28,8 +28,13 @@ const ApplyJobSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-},{timestamps: true});
+    status: {
+        type: String,
+        default: 'pending',
+        enum: ['pending', 'accepted', 'rejected']
+    }
+}, { timestamps: true });
 
-const AppliedJob =  mongoose.models.AppliedJob || mongoose.model('AppliedJob', ApplyJobSchema);
+const AppliedJob = mongoose.models.AppliedJobStatus || mongoose.model('AppliedJobStatus', ApplyJobSchema);
 
 export default AppliedJob;

@@ -1,55 +1,56 @@
-import { get_my_posted_job } from '@/Services/job';
-import { setMyJobs } from '@/Utils/JobSlice';
-import JobsCard from '@/components/JobsCard';
+import { get_all_applications } from '@/Services/job';
+import ApplicationsDataTable from '@/components/ApplicationsDataTable'
 import NavBar from '@/components/NavBar'
 import Cookies from 'js-cookie';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { InfinitySpin } from 'react-loader-spinner';
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
-export default function PostedJobs() {
+export default function PostedJobsDetails() {
     const router = useRouter();
-    const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
+    const { id } = router.query;
     const user = useSelector(state => state?.User?.userData)
-    const myJobs = useSelector(state => state.Job.myJobs);
-    const id = user?._id
+    const userId = user?._id
 
+    const [application, setApplication] = useState([]);
 
 
     useEffect(() => {
-        if (!id || !Cookies.get('token')) {
+        if (!userId || !Cookies.get('token')) {
             router.push('/auth/login')
         }
-    }, [user, id, Cookies])
+    }, [user, userId, Cookies])
+
 
 
     useEffect(() => {
-        getThisUserPostedJobs()
+        getAllApplications()
     }, [])
 
-    const getThisUserPostedJobs = async () => {
-        const res = await get_my_posted_job(id)
-        console.log(res)
+    const getAllApplications = async () => {
+        const res = await get_all_applications(id);
         if (res.success) {
-            dispatch(setMyJobs(res.data))
-        } else {
+            setApplication(res.data)
+        }
+        else {
             toast.error(res.message)
         }
     }
 
+
     useEffect(() => {
-        if (myJobs?.length > 0) {
+        if (application?.length > 0) {
             setLoading(false)
         }
-    }, [myJobs])
-
+    }, [application])
 
 
     return (
         <>
+
             {
                 loading ? (
 
@@ -62,19 +63,17 @@ export default function PostedJobs() {
                         <NavBar />
                         <div className='w-full  pt-20'>
                             <div className='w-full h-20 bg-gray-50 text-indigo-600 font-bold flex items-center justify-center flex-col'>
-                                <h1 className='text-3xl'>Posted Jobs</h1>
+                                <h1 className='text-3xl'>Detail List of  Jobs Application</h1>
                             </div>
                             <div className='w-full h-full px-4 py-4 flex  overflow-y-auto  items-start justify-center flex-wrap'>
-                                {
-                                    myJobs?.map((job, index) => (
-                                        <JobsCard key={index} job={job}  posted={true}/>
-                                    ))
-                                }
+                                <ApplicationsDataTable application={application} setApplication={setApplication} />
                             </div>
                         </div>
                     </>
                 )
+
             }
+
         </>
     )
 }

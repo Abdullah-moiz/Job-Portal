@@ -4,7 +4,7 @@ import { BsDot } from 'react-icons/bs'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { useRouter } from 'next/router'
 
-export default function JobsCard({job}) {
+export default function JobsCard({job , posted}) {
     const router = useRouter();
     return (
         <div key={job._id} className='w-full cursor-pointer  transition-all duration-1000  md:w-5/12 m-4 border hover:shadow-xl rounded px-4 md:flex md:flex-wrap'>
@@ -34,7 +34,14 @@ export default function JobsCard({job}) {
                         <p>{job?.title} </p>
                     </div>
                 </div>
-                <button onClick={() => router.push(`/frontend/jobDetails/${job?._id}`)} className='my-2 py-2 px-4  border border-indigo-600   rounded flex items-center justify-center transition-all duration-700 hover:bg-indigo-600 hover:text-white text-indigo-600 font-semibold'>View Detail <AiOutlineArrowRight className='mx-2 text-xl' /></button>
+                {
+                    posted ? (
+                        <button onClick={() => router.push(`/frontend/detailPostedJob/${job?._id}`)} className='my-2 py-2 px-4  border border-indigo-600   rounded flex items-center justify-center transition-all duration-700 hover:bg-indigo-600 hover:text-white text-indigo-600 font-semibold'>View Applications <AiOutlineArrowRight className='mx-2 text-xl' /></button>
+                    ) : (
+
+                        <button onClick={() => router.push(`/frontend/jobDetails/${job?._id}`)} className='my-2 py-2 px-4  border border-indigo-600   rounded flex items-center justify-center transition-all duration-700 hover:bg-indigo-600 hover:text-white text-indigo-600 font-semibold'>View Detail <AiOutlineArrowRight className='mx-2 text-xl' /></button>
+                    )
+                }
             </div>
         </div>
     )

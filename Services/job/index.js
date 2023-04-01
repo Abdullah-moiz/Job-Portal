@@ -85,3 +85,35 @@ export const get_my_posted_job = async (id) => {
         console.log('error in   getting my all job (service) => ', error);
     }
 }
+
+
+
+export const get_all_applications = async (id) => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/getAllApplicationsOfSpecifiedJob?id=${id}`, {
+            method: 'GET',
+        })
+        const data = res.json();
+        return data;
+    } catch (error) {
+        console.log('error in   getting my all application of specified jobs (service) => ', error);
+    }
+}
+
+
+
+export const change_application_status = async (formData) => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/responseOfApplication`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+        const data = res.json();
+        return data;
+    } catch (error) {
+        console.log('error in   getting my all application of specified jobs (service) => ', error);
+    }
+}
