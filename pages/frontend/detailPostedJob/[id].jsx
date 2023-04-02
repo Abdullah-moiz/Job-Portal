@@ -43,10 +43,12 @@ export default function PostedJobsDetails() {
 
     useEffect(() => {
         if (application === undefined || application === null) {
-            setLoading(false)
-          } else if (application.length > 0) {
-            setLoading(false)
-          }
+            setTimeout(() => setLoading(false), 2000);
+        } else if (application.length > 0) {
+            setLoading(false);
+        } else {
+            setLoading(false);
+        }
     }, [application])
 
 
