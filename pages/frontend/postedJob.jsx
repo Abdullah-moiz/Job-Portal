@@ -41,9 +41,11 @@ export default function PostedJobs() {
     }
 
     useEffect(() => {
-        if (myJobs?.length > 0) {
+        if (myJobs === undefined || myJobs === null) {
             setLoading(false)
-        }
+          } else if (myJobs.length > 0) {
+            setLoading(false)
+          }
     }, [myJobs])
 
 

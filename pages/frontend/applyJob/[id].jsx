@@ -67,7 +67,7 @@ export default function ApplyJob() {
         if (res.success) {
             toast.success('Your Application is Submitted , Redirecting ... ')
             setTimeout(() => {
-                router.push('/frontend/dashboard')
+                router.push('/')
             }, 1000);
 
         } else {

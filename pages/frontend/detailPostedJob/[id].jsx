@@ -42,9 +42,11 @@ export default function PostedJobsDetails() {
 
 
     useEffect(() => {
-        if (application?.length > 0) {
+        if (application === undefined || application === null) {
             setLoading(false)
-        }
+          } else if (application.length > 0) {
+            setLoading(false)
+          }
     }, [application])
 
 
