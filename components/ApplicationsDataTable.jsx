@@ -26,8 +26,6 @@ export default function ApplicationsDataTable({ application , setApplication }) 
     const handleAcceptStatus = async (id) => {
         const data = {id , status : "approved"}
         const res = await change_application_status(data);
-
-        console.log(res)
         if(res.success) {
             toast.success(res.message)
             router.push('/frontend/postedJob')
@@ -40,7 +38,6 @@ export default function ApplicationsDataTable({ application , setApplication }) 
     const handleRejectStatus = async (id) => {
         const data = {id , status : "rejected"}
         const res = await change_application_status(data);
-        console.log(res)
         if(res.success) {
             toast.success(res.message)
             router.push('/frontend/postedJob')
