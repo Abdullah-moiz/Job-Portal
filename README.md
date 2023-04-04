@@ -22,6 +22,12 @@
 - Status Updated for applied Job based on Job poster action 
 
 
+## Tech
+- Nextjs
+- tailwind css
+- Redux toolkit
+- joi validation
+- mongoDB
 
 ## Environment Variables
 
