@@ -31,9 +31,11 @@ export default function PostedJobsDetails() {
     }, [])
 
     const getAllApplications = async () => {
+
         const res = await get_all_applications(id);
         if (res.success) {
             setApplication(res.data)
+            setLoading(false)
         }
         else {
             toast.error(res.message)
@@ -41,15 +43,6 @@ export default function PostedJobsDetails() {
     }
 
 
-    useEffect(() => {
-        if (application === undefined || application === null) {
-            setTimeout(() => setLoading(false), 2000);
-        } else if (application.length > 0) {
-            setLoading(false);
-        } else {
-            setLoading(false);
-        }
-    }, [application])
 
 
     return (
@@ -70,7 +63,7 @@ export default function PostedJobsDetails() {
                                 <h1 className='text-3xl'>Detail List of  Jobs Application</h1>
                             </div>
                             <div className='w-full h-full px-4 py-4 flex  overflow-y-auto  items-start justify-center flex-wrap'>
-                                <ApplicationsDataTable application={application} setApplication={setApplication} />
+                                <ApplicationsDataTable application={application}  />
                             </div>
                         </div>
                     </>
