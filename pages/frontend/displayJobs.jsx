@@ -6,6 +6,7 @@ import { get_job } from '@/Services/job'
 import { setJobData } from '@/Utils/JobSlice'
 import { InfinitySpin } from 'react-loader-spinner'
 import JobsCard from '@/components/JobsCard'
+import { toast } from 'react-toastify'
 
 
 
@@ -13,29 +14,31 @@ import JobsCard from '@/components/JobsCard'
 export default function DisplayJobs() {
     const dispatch = useDispatch();
     const router = useRouter();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        (
-            async () => {
-                const res = await get_job()
-                if (res.success) dispatch(setJobData(res.data))
-            }
-        )()
+        fetchJobData()
     }, [])
 
 
+    const fetchJobData = async () => {
+        const res = await get_job()
+        if (res.success) {
+            dispatch(setJobData(res?.data))
+            setLoading(false)
+        }else{
+            toast.error(res?.message)
+        }
+    }
 
 
 
-    const [loading, setLoading] = useState(true);
-    const JobData = useSelector(state => state.Job.JobData)
+
+
+    
+    const JobData = useSelector(state => state?.Job?.JobData)
    
   
-    useEffect(() => {
-        if (JobData.length > 0) {
-            setLoading(false);
-        } 
-    }, [JobData])
 
     return (
 
