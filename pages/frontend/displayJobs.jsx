@@ -32,13 +32,9 @@ export default function DisplayJobs() {
    
   
     useEffect(() => {
-        if (JobData === undefined || JobData === null) {
-            setTimeout(() => setLoading(false), 2000);
-        } else if (JobData.length > 0) {
+        if (JobData.length > 0) {
             setLoading(false);
-        } else {
-            setLoading(false);
-        }
+        } 
     }, [JobData])
 
     return (
