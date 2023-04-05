@@ -14,7 +14,7 @@ export default function PostedJobs() {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const user = useSelector(state => state?.User?.userData)
-    const myJobs = useSelector(state => state.Job.myJobs);
+    const myJobs = useSelector(state => state?.Job?.myJobs);
     const id = user?._id
 
 
@@ -32,23 +32,14 @@ export default function PostedJobs() {
 
     const getThisUserPostedJobs = async () => {
         const res = await get_my_posted_job(id)
-        console.log(res)
         if (res.success) {
             dispatch(setMyJobs(res.data))
+            setLoading(false);
         } else {
             toast.error(res.message)
         }
     }
 
-    useEffect(() => {
-        if (myJobs === undefined || myJobs === null) {
-            setTimeout(() => setLoading(false), 2000);
-        } else if (myJobs.length > 0) {
-            setLoading(false);
-        } else {
-            setLoading(false);
-        }
-    }, [myJobs])
 
 
 
