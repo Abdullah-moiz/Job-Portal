@@ -105,7 +105,7 @@ export const get_all_applications = async (id) => {
 export const change_application_status = async (formData) => {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/responseOfApplication`, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
