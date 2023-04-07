@@ -77,7 +77,6 @@ export default function SavedJobDataTable() {
     const handleDelete = async  (id) => {
         const res =  await delete_book_mark_job(id);
         if(res.success) {
-            toast.success(res.message);
            return setFilteredData(filteredData.filter(item => item?._id !== id))
         }
         else{

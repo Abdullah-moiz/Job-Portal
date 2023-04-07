@@ -45,7 +45,7 @@ export const  bookmark_my_job = async (req, res) => {
         return res.status(200).json({ success: true, message: "Job Bookmarked successfully !" })
     } catch (error) {
         console.log('Error in booking marking a job (server) => ', error);
-        return res.status(500).json({ success: false, message: "Something Went Wrong Please Retry Later !" })
+        return res.status(500).json({ success: false, message: "Something Went Wrong Please Retry login !" })
     }
 }
 

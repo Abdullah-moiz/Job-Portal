@@ -31,7 +31,7 @@ export default async (req, res) => {
         return res.status(200).json({ success: true, message: "Job Posted Successfully !" })
     } catch (error) {
         console.log('Error in posting a job (server) => ', error);
-        return res.status(500).json({ success: false, message: "Something Went Wrong Please Retry Later !" })
+        return res.status(500).json({ success: false, message: "Something Went Wrong Please Retry login !" })
     }
 }
 

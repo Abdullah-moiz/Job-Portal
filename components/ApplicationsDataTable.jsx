@@ -27,7 +27,6 @@ export default function ApplicationsDataTable({ application  }) {
         const data = {id , status : "approved"}
         const res = await change_application_status(data);
         if(res.success) {
-            toast.success(res.message)
             router.push('/frontend/postedJob')
         }else{
             toast.error(res.message)
@@ -39,7 +38,6 @@ export default function ApplicationsDataTable({ application  }) {
         const data = {id , status : "rejected"}
         const res = await change_application_status(data);
         if(res.success) {
-            toast.success(res.message)
             router.push('/frontend/postedJob')
         }else{
             toast.error(res.message)
@@ -63,7 +61,7 @@ export default function ApplicationsDataTable({ application  }) {
         },
         {
             name: 'Status',
-            selector: row => row?.status,
+            selector: row => <p className={`uppercase font-semibold ${row?.status === "approved" ? "text-green-500" : ""}  ${row?.status === "rejected" ? "text-red-600" : ""}`}>{row?.status}</p> ,
         },
         {
             name: 'Action',
