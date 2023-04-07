@@ -78,7 +78,7 @@ export default async (req, res) => {
             if (error) return res.status(401).json({ success: false, message: error.details[0].message.replace(/['"]+/g, '') });
 
             const newJobApplication = AppliedJob.create(jobApplication);
-            return res.status(200).json({ success: true, message: 'Job application submitted successfully' });
+            return res.status(200).json({ success: true, message: 'Job application submitted successfully !' });
 
 
         })
