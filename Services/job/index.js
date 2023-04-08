@@ -1,5 +1,7 @@
 
 
+// post job api
+
 export const post_job = async (formData) => {
 
     try {
@@ -18,6 +20,7 @@ export const post_job = async (formData) => {
 }
 
 
+// get job api
 export const get_job = async () => {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/getAllJobs`, {
@@ -30,7 +33,7 @@ export const get_job = async () => {
     }
 }
 
-
+// get specified job api
 export const get_specified_job = async (id) => {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/getSpecifiedJob?id=${id}`, {
@@ -44,6 +47,8 @@ export const get_specified_job = async (id) => {
 }
 
 
+
+// apply  job api
 
 export const apply_job = async (formData) => {
     try {
@@ -59,7 +64,8 @@ export const apply_job = async (formData) => {
 }
 
 
-
+// get my all applied job api
+ 
 export const get_my_applied_job = async (id) => {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/getAppliedJobs?id=${id}`, {
@@ -73,6 +79,7 @@ export const get_my_applied_job = async (id) => {
 }
 
 
+// get my all posted job api 
 
 export const get_my_posted_job = async (id) => {
     try {
@@ -87,6 +94,7 @@ export const get_my_posted_job = async (id) => {
 }
 
 
+// get my all application of specified jobs api
 
 export const get_all_applications = async (id) => {
     try {
@@ -101,6 +109,7 @@ export const get_all_applications = async (id) => {
 }
 
 
+// change application status api
 
 export const change_application_status = async (formData) => {
     try {
