@@ -5,8 +5,8 @@ import { AppliedJobReducer } from '@/Utils/AppliedJobSlice'
 
 export const store = configureStore({
   reducer: {
-    User: UserReducer,
-    Job : JobReducer,
-    AppliedJob : AppliedJobReducer,
+    User: UserReducer, // UserReducer is a function that returns a slice of state
+    Job : JobReducer, // JobReducer is a function that returns a slice of state
+    AppliedJob : AppliedJobReducer, // AppliedJobReducer is a function that returns a slice of state
   },
 })

@@ -1,3 +1,6 @@
+
+
+// bookmark job api
 export const book_mark_job = async (formData) => {
 
     try {
@@ -15,6 +18,7 @@ export const book_mark_job = async (formData) => {
     }
 }
 
+// get bookmark job api
 
 export const get_book_mark_job = async (id) => {
     try {
@@ -29,6 +33,7 @@ export const get_book_mark_job = async (id) => {
 }
 
 
+// delete bookmark job api
 
 export const delete_book_mark_job = async (id) => {
     try {
