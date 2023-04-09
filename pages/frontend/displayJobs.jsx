@@ -7,6 +7,7 @@ import { setJobData } from '@/Utils/JobSlice'
 import { InfinitySpin } from 'react-loader-spinner'
 import JobsCard from '@/components/JobsCard'
 import { toast } from 'react-toastify'
+import useSWR from 'swr'
 
 
 
@@ -14,37 +15,24 @@ import { toast } from 'react-toastify'
 export default function DisplayJobs() {
     const dispatch = useDispatch();
     const router = useRouter();
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        fetchJobData()
-    }, [])
 
 
-    const fetchJobData = async () => {
-        const res = await get_job()
-        if (res.success) {
-            dispatch(setJobData(res?.data))
-            setLoading(false)
-        }else{
-            toast.error(res?.message)
-        }
-    }
-
-
-
-
-
+    const { data, error, isLoading } = useSWR('/getAllJobs', get_job, { refreshInterval: 1000 })
     
-    const JobData = useSelector(state => state?.Job?.JobData)
-   
-  
+    useEffect(() => {
+        if(data) dispatch(setJobData(data?.data))
+    }, [data , dispatch])
 
+
+
+    const JobData = useSelector(state => state?.Job?.JobData) || [];
+    
+    console.log(JobData)
     return (
 
         <>
             {
-                loading ? (
+                isLoading ? (
                     <div className='bg-gray w-full h-screen flex items-center flex-col justify-center'>
                         <InfinitySpin width='200' color="#4f46e5" />
                         <p className='text-xs uppercase'>Loading Resources Hold Tight...</p>
@@ -57,11 +45,11 @@ export default function DisplayJobs() {
                             <div className='w-full h-full py-4 flex  overflow-y-auto  items-center justify-center flex-wrap'>
                                 {/* map */}
                                 {
-                                    JobData?.map((job) => {
+                                    Array.isArray(JobData) && JobData.length > 0 ? JobData?.map((job) => {
                                         return (
                                            <JobsCard job={job} key={job?._id} />
                                         )
-                                    })
+                                    }) : <p>No jobs found</p>
                                 }
 
                                 {/* map */}

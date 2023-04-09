@@ -34,7 +34,8 @@
     "react-multi-input": "^1.0.0",
     "react-redux": "^8.0.5",
     "react-select": "^5.7.0",
-    "react-toastify": "^9.1.1"
+    "react-toastify": "^9.1.1",
+    "swr": "^2.1.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
