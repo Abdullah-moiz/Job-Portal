@@ -27,7 +27,7 @@ export default function DisplayJobs() {
 
     const JobData = useSelector(state => state?.Job?.JobData) || [];
     
-    console.log(JobData)
+    
     return (
 
         <>
