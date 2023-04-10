@@ -8,11 +8,11 @@ import React, { useEffect, useState } from 'react'
 import { InfinitySpin } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify';
+import useSWR from 'swr'
 
 export default function PostedJobs() {
     const router = useRouter();
     const dispatch = useDispatch();
-    const [loading, setLoading] = useState(true);
     const user = useSelector(state => state?.User?.userData)
     const myJobs = useSelector(state => state?.Job?.myJobs);
     const id = user?._id
@@ -26,27 +26,18 @@ export default function PostedJobs() {
     }, [user, id, Cookies])
 
 
+    const { data, error, isLoading } = useSWR('/getMyPostedJobs', () =>  get_my_posted_job(id), { refreshInterval: 1000 })
+    
     useEffect(() => {
-        getThisUserPostedJobs()
-    }, [])
+        if(data) dispatch(setMyJobs(data?.data))
+    }, [data , dispatch])
 
-    const getThisUserPostedJobs = async () => {
-        const res = await get_my_posted_job(id)
-        if (res.success) {
-            dispatch(setMyJobs(res.data))
-            setLoading(false);
-        } else {
-            toast.error(res.message)
-        }
-    }
-
-
-
+    if(error) toast.error(error)
 
     return (
         <>
             {
-                loading ? (
+                isLoading ? (
 
                     <div className='bg-gray w-full h-screen flex items-center flex-col justify-center'>
                         <InfinitySpin width='200' color="#4f46e5" />
