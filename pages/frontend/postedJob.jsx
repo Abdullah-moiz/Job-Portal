@@ -26,7 +26,7 @@ export default function PostedJobs() {
     }, [user, id, Cookies])
 
 
-    const { data, error, isLoading } = useSWR('/getMyPostedJobs', () =>  get_my_posted_job(id), { refreshInterval: 1000 })
+    const { data, error, isLoading } = useSWR('/getMyPostedJobs', () =>  get_my_posted_job(id))
     
     useEffect(() => {
         if(data) dispatch(setMyJobs(data?.data))

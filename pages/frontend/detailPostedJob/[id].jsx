@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { InfinitySpin } from 'react-loader-spinner';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import useSWR from 'swr'
 
 export default function PostedJobsDetails() {
     const router = useRouter();
@@ -24,32 +25,16 @@ export default function PostedJobsDetails() {
         }
     }, [user, userId, Cookies])
 
-
-
-    useEffect(() => {
-        getAllApplications()
-    }, [])
-
-    const getAllApplications = async () => {
-
-        const res = await get_all_applications(id);
-        if (res.success) {
-            setApplication(res.data)
-            setLoading(false)
-        }
-        else {
-            toast.error(res.message)
-        }
-    }
-
-
-
+    const { data, error , isLoading } = useSWR(`/get-all-Application`, () => get_all_applications(id));
+    if(error) toast.error(error)
+    
+    setApplication(data?.data)
 
     return (
         <>
 
             {
-                loading ? (
+                isLoading ? (
 
                     <div className='bg-gray w-full h-screen flex items-center flex-col justify-center'>
                         <InfinitySpin width='200' color="#4f46e5" />

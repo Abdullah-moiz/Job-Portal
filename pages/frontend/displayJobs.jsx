@@ -17,7 +17,7 @@ export default function DisplayJobs() {
     const router = useRouter();
 
 
-    const { data, error, isLoading } = useSWR('/getAllJobs', get_job, { refreshInterval: 1000 })
+    const { data, error, isLoading } = useSWR('/getAllJobs', get_job)
     
     useEffect(() => {
         if(data) dispatch(setJobData(data?.data))

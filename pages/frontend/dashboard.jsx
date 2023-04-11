@@ -11,7 +11,7 @@ import { BsFillBookmarkStarFill } from 'react-icons/bs'
 import { GiSuitcase } from 'react-icons/gi'
 import { InfinitySpin } from 'react-loader-spinner'
 import { useDispatch, useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
+
 
 
 
@@ -29,6 +29,9 @@ export default function Dashboard() {
       router.push('/auth/login')
     }
   }, [activeUser, id, Cookies])
+
+  
+
 
   useEffect(() => {
     fetchAppliedJobs()
