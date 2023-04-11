@@ -26,9 +26,12 @@ export default function PostedJobsDetails() {
     }, [user, userId, Cookies])
 
     const { data, error , isLoading } = useSWR(`/get-all-Application`, () => get_all_applications(id));
-    if(error) toast.error(error)
     
-    setApplication(data?.data)
+     useEffect(() => {
+        if(data) setApplication(data?.data)
+    }, [data])
+
+    if(error) toast.error(error)
 
     return (
         <>

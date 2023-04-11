@@ -5,6 +5,7 @@ import DataTable from 'react-data-table-component';
 import { toast } from 'react-toastify';
 
 export default function ApplicationsDataTable({ application  }) {
+
     const router = useRouter();
 
 
@@ -13,7 +14,10 @@ export default function ApplicationsDataTable({ application  }) {
 
     useEffect(() => {
         setData(application)
-    }, [])
+    }, [application])
+
+
+
 
     const [search, setSearch] = useState('');
     const [filteredData, setFilteredData] = useState([]);
