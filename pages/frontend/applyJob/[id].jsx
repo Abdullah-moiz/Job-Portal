@@ -52,6 +52,13 @@ export default function ApplyJob() {
             return;
         }
 
+        // Check if the file type is PDF
+        if (file.type !== 'application/pdf') {
+            setError({ ...error, cv: "Please Upload a PDF file" })
+            return;
+        }
+
+
 
 
         const form = new FormData();
@@ -107,7 +114,7 @@ export default function ApplyJob() {
                     </div>
                     <div className='w-full mb-4  flex flex-col items-start justify-center'>
                         <label htmlFor="file" className='mb-1 text-base font-semibold'>Upload CV :</label>
-                        <input name='cv' onChange={(e) => setFile(e.target.files[0])} type="file" id='file' className='w-full py-2 px-3 mb-2 border border-indigo-600 rounded' placeholder='Enter Email' />
+                        <input accept="application/pdf" name='cv' onChange={(e) => setFile(e.target.files[0])} type="file" id='file' className='w-full py-2 px-3 mb-2 border border-indigo-600 rounded' placeholder='Enter Email' />
                         {
                             error.cv && <p className="text-sm text-red-500">{error.cv}</p>
                         }
