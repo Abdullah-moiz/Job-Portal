@@ -16,6 +16,7 @@ import { get_specified_job } from '@/Services/job'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { InfinitySpin } from 'react-loader-spinner'
+import useSWR from 'swr'
 import { book_mark_job } from '@/Services/job/bookmark'
 
 
@@ -30,28 +31,22 @@ export default function JobDetails() {
     const [JobDetails, setJobDetails] = useState(null);
 
 
+    const { data, error , isLoading } = useSWR(`/get-specified-job`, () => get_specified_job(id));
+
+
     useEffect(() => {
-        (async () => {
-            const res = await get_specified_job(id);
-            if (res.success) {
-                setJobDetails(res.data)
-            }
-            else { toast.error(res.message) }
-        }
-        )()
+        if(data) setJobDetails(data?.data)
+    }, [data])
 
 
-
-    }, [id])
+    if(error) toast.error(error)
 
 
     useEffect(() => {
         if (JobDetails) {
-
             const filteredJobData = JobData?.filter((job) => job.job_category === JobDetails?.job_category)
             const filteredJobData2 = filteredJobData?.filter((job) => job._id !== JobDetails?._id)
             dispatch(setMatchingJobDat(filteredJobData2))
-
         }
     }, [JobDetails, JobData, dispatch])
 
@@ -80,7 +75,7 @@ export default function JobDetails() {
     return (
         <>
             {
-                JobDetails === null || JobDetails === undefined ? (
+                isLoading ? (
                     <div className='bg-gray w-full h-screen flex items-center flex-col justify-center'>
                         <InfinitySpin width='200' color="#4f46e5" />
                         <p className='text-xs uppercase'>Loading Resources Hold Tight...</p>
