@@ -126,3 +126,17 @@ export const change_application_status = async (formData) => {
         console.log('error in   getting my all application of specified jobs (service) => ', error);
     }
 }
+
+
+
+export const get_application_details = async (id) => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/getApplicationDetail?id=${id}`, {
+            method: 'GET',
+        })
+        const data = res.json();
+        return data;
+    } catch (error) {
+        console.log('error in   getting my all application of specified jobs (service) => ', error);
+    }
+}

@@ -60,17 +60,14 @@ export default function ApplicationsDataTable({ application  }) {
             selector: row => row?.user?.email,
         },
         {
-            name: 'CV',
-            selector: row => row?.cv
-        },
-        {
             name: 'Status',
             selector: row => <p className={`uppercase font-semibold ${row?.status === "approved" ? "text-green-500" : ""}  ${row?.status === "rejected" ? "text-red-600" : ""}`}>{row?.status}</p> ,
         },
         {
             name: 'Action',
             cell: row => (
-                <div className='flex items-center justify-start w-40 h-20'>
+                <div className='flex items-center justify-start w-72 h-20'>
+                    <button onClick={() => router.push(`/frontend/applicationDetail/${row?._id}`)} className=' w-20 py-2 mx-2 text-xs text-indigo-600 hover:text-white my-2 hover:bg-indigo-600 border border-indigo-600 rounded transition-all duration-700'>Details</button>
                     <button onClick={() => handleAcceptStatus(row?._id)} className=' w-20 py-2 mx-2 text-xs text-green-600 hover:text-white my-2 hover:bg-green-600 border border-green-600 rounded transition-all duration-700'>Approved</button>
                     <button onClick={() => handleRejectStatus(row?._id)} className=' w-20 py-2 mx-2 text-xs text-red-600 hover:text-white my-2 hover:bg-red-600 border border-red-600 rounded transition-all duration-700'>Reject</button>
                 </div>
