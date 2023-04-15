@@ -1,25 +1,32 @@
 /** @type {import('next').NextConfig} */
+
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+
 const nextConfig = {
   images: {
     domains: ['api.dicebear.com', 'xsgames.co'],
   },
   reactStrictMode: true,
-  webpack: (config, { isServer }) => {
-    // Add file-loader to handle PDF files
-    config.module.rules.push({
-      test: /\.(pdf)$/,
-      use: [
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
         {
-          loader: 'file-loader',
-          options: {
-            publicPath: '/_next',
-            name: isServer ? 'static/media/[name].[hash].[ext]' : 'static/media/[hash].[ext]',
-          },
+          from: path.join(__dirname, './node_modules/pdfjs-dist/build/pdf.worker.min.js'),
+          to: path.join(__dirname, 'dist'),
         },
       ],
-    });
+    }),
 
-    return config;
+  ],
+  entry: {
+    main: './src/index.tsx',
+    'pdf.worker': path.join(__dirname, './node_modules/pdfjs-dist/build/pdf.worker.min.js'),
+  },
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].bundle.js'
   },
 }
 

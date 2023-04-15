@@ -5,10 +5,12 @@ import { get_application_details } from '@/Services/job';
 import { InfinitySpin } from 'react-loader-spinner';
 import NavBar from '@/components/NavBar';
 import { toast } from 'react-toastify';
-import { Page, Document } from '@react-pdf/renderer';
-import { PDFViewer } from '@react-pdf/renderer';
 import Cookies from 'js-cookie';
 import { useSelector } from 'react-redux';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import { Viewer } from '@react-pdf-viewer/core';
+import { Worker } from '@react-pdf-viewer/core';
+import packageJson from '@/package.json';
 
 
 
@@ -16,6 +18,7 @@ import { useSelector } from 'react-redux';
 
 
 export default function ApplicationsDetail() {
+    const pdfjsVersion = packageJson.dependencies['pdfjs-dist'];
     const router = useRouter();
     const { id } = router.query;
 
@@ -67,16 +70,24 @@ export default function ApplicationsDetail() {
                         </div>
                         {
                             data?.data?.cv ? (
-                                <div className='w-full px-4 '>
-                                   
-                                </div>
+
+                                <Worker workerUrl={`https://unpkg.com/pdfjs-dist@${pdfjsVersion}/build/pdf.worker.min.js`}>
+                                    <div className='w-3/4'
+                                        style={{
+                                            border: '1px solid rgba(0, 0, 0, 0.3)',
+                                            height: '750px',
+                                        }}
+                                    >
+                                        <Viewer fileUrl={`uploads/cv.pdf`} />
+                                    </div>
+                                </Worker>
                             )
                                 : (
                                     <div className='w-full px-4  '>
                                         <div className='w-full h-32 bg-gray-50 text-indigo-600 font-bold flex items-center justify-center flex-col'>
                                             <h1 className='text-3xl'>No CV Uploaded</h1>
                                         </div>
-                                        
+
                                     </div>
                                 )
                         }
