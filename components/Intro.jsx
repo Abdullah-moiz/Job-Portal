@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BiSearchAlt } from 'react-icons/bi'
 import Image from 'next/image'
 import { BsFillBookmarkFill } from 'react-icons/bs'
@@ -9,16 +9,19 @@ export default function Intro() {
   const [search, setSearch] = useState('');
   const jobData = useSelector(state => state.Job.JobData);
   const [filterJobs, setFilteredJobs] = useState([])
+  const [doneSearch , setDoneSearch] = useState(false)
+
+
+
 
   const handleSearch = (e) => {
     e.preventDefault();
-
-    const filteredJobs = jobData.filter((job) => {
+    const filteredJobs = jobData?.filter((job) => {
       let x = job?.job_category;
-      return x.toUpperCase() === search.toUpperCase();
+      return x?.toUpperCase() === search?.toUpperCase().trim();
     });
-
     setFilteredJobs(filteredJobs);
+    setDoneSearch(true)
   }
 
   return (
@@ -38,9 +41,9 @@ export default function Intro() {
               <h1 className='font-semibold text-lg'>Suggest Tag : </h1>
             </div>
             <div className='flex   items-center justify-center px-4 flex-wrap'>
-              <p className='px-2  text-gray-600'>Engineer</p>
-              <p className='px-2  text-gray-600'>UI/UX Design</p>
+              <p className='px-2  text-gray-600'>Software</p>
               <p className='px-2  text-gray-600'>Marketing</p>
+              <p className='px-2  text-gray-600'>UI/UX Design</p>
             </div>
           </div>
         </div>
@@ -49,14 +52,14 @@ export default function Intro() {
         </div>
       </div>
       {
-        filterJobs.length > 0 && (
+        doneSearch && (
           <div className='w-full flex flex-wrap items-center justify-center py-2 px-2'>
             {
               Array.isArray(filterJobs) && filterJobs.length > 0 ? filterJobs?.map((job) => {
                 return (
                   <JobsCard job={job} key={job?._id} />
                 )
-              }) : <p>No jobs found</p>
+              }) : <p className='text-sm text-center font-semibold  text-red-500'>Sorry No such Categories Job Available Right Now</p>
             }
           </div>
         )
