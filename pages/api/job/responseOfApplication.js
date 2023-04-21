@@ -1,11 +1,26 @@
 import ConnectDB from '@/DB/connectDB';
+import validateToken from '@/middleware/tokenValidation';
 import AppliedJob from '@/models/ApplyJob';
 
 
 
 
-
 export default async (req, res) => {
+    await ConnectDB();
+    const { method } = req;
+    switch (method) {
+        case 'PUT':
+            await validateToken(req, res, async () => {
+                await change_application_status(req, res);
+            });
+            break;
+        default:
+            res.status(400).json({ success: false, message: 'Invalid Request' });
+    }
+}
+
+
+const change_application_status =  async (req, res) => {
     await ConnectDB();
     const data = req.body;
     const {status, id} = data;

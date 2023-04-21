@@ -5,6 +5,7 @@ import formidable from 'formidable';
 import fs from 'fs';
 import path from 'path'
 import crypto from 'crypto';
+import validateToken from '@/middleware/tokenValidation';
 
 const schema = Joi.object({
     name: Joi.string().required(),
@@ -21,9 +22,23 @@ export const config = {
 };
 
 
-
-
 export default async (req, res) => {
+    await ConnectDB();
+    const { method } = req;
+    switch (method) {
+        case 'POST':
+            await validateToken(req, res, async () => {
+                await applyToJob(req, res);
+            });
+            break;
+        default:
+            res.status(400).json({ success: false, message: 'Invalid Request' });
+    }
+}
+
+
+
+const applyToJob =  async (req, res) => {
     await ConnectDB();
 
 

@@ -1,4 +1,5 @@
 import ConnectDB from '@/DB/connectDB';
+import validateToken from '@/middleware/tokenValidation';
 import Job from '@/models/Job';
 import Joi from 'joi';
 
@@ -19,6 +20,20 @@ const schema = Joi.object({
 
 
 export default async (req, res) => {
+    await ConnectDB();
+    const { method } = req;
+    switch (method) {
+        case 'POST':
+            await validateToken(req, res, async () => {
+                await postAJob(req, res);
+            });
+            break;
+        default:
+            res.status(400).json({ success: false, message: 'Invalid Request' });
+    }
+}
+
+const postAJob =  async (req, res) => {
     await ConnectDB();
     const data = req.body;
     const { user ,title,description , salary , company , email , job_category , job_type , job_experience , job_vacancy , job_deadline } = data;

@@ -1,16 +1,29 @@
 import ConnectDB from '@/DB/connectDB';
+import validateToken from '@/middleware/tokenValidation';
 import AppliedJob from '@/models/ApplyJob';
-
-
-
 
 
 export default async (req, res) => {
     await ConnectDB();
+    const { method } = req;
+    switch (method) {
+        case 'GET':
+
+            await getApplicationDetail(req, res);
+
+            break;
+        default:
+            res.status(400).json({ success: false, message: 'Invalid Request' });
+    }
+}
+
+
+
+const getApplicationDetail = async (req, res) => {
     const data = req.query;
     const id = data?.id
 
-    if(!id) return res.status(400).json({ success: false, message: "Please Login" })
+    if (!id) return res.status(400).json({ success: false, message: "Please Login" })
 
     try {
         const getApplicationDetails = await AppliedJob.findById(id).populate('job').populate('user')
