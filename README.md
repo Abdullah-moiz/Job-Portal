@@ -20,7 +20,8 @@
 - Track Your Posted Jobs and view Submitted Application 
 - Accept and Reject Different Application 
 - Status Updated for applied Job based on Job poster action 
-- View or download Applicant CV's (Comming soon)
+- View or download Applicant CV's (TODO)
+- JWT validation on each Authorized Request 
 
 
 ## Tech
