@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import { toast } from 'react-toastify';
 
-export default function ApplicationsDataTable({ application  }) {
+export default function ApplicationsDataTable({ application }) {
 
     const router = useRouter();
 
@@ -28,27 +28,37 @@ export default function ApplicationsDataTable({ application  }) {
 
 
     const handleAcceptStatus = async (id) => {
-        const data = {id , status : "approved"}
+        const data = { id, status: "approved" }
         const res = await change_application_status(data);
-        if(res.success) {
+        if (res.success) {
             router.push('/frontend/postedJob')
-        }else{
+        } else {
             toast.error(res.message)
         }
 
     }
 
     const handleRejectStatus = async (id) => {
-        const data = {id , status : "rejected"}
+        const data = { id, status: "rejected" }
         const res = await change_application_status(data);
-        if(res.success) {
+        if (res.success) {
             router.push('/frontend/postedJob')
-        }else{
+        } else {
             toast.error(res.message)
         }
     }
 
+    const handleDownloadCV = async (name) => {
+        const fileUrl = `/uploads/${name}`;
+        const link = document.createElement('a');
+        link.href = fileUrl;
+        link.download = 'cv.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
 
+    
 
     const columns = [
         {
@@ -61,7 +71,15 @@ export default function ApplicationsDataTable({ application  }) {
         },
         {
             name: 'Status',
-            selector: row => <p className={`uppercase font-semibold ${row?.status === "approved" ? "text-green-500" : ""}  ${row?.status === "rejected" ? "text-red-600" : ""}`}>{row?.status}</p> ,
+            selector: row => <p className={`uppercase font-semibold ${row?.status === "approved" ? "text-green-500" : ""}  ${row?.status === "rejected" ? "text-red-600" : ""}`}>{row?.status}</p>,
+        },
+        {
+            name: 'CV',
+            selector: row => <button onClick={() => handleDownloadCV(row?.cv)} className=' w-20 py-2 text-xs text-indigo-600 hover:text-white my-2 hover:bg-indigo-600 border border-indigo-600 rounded transition-all duration-700'>Download CV</button>
+        },
+        {
+            name: 'Status',
+            selector: row => <p className={`uppercase font-semibold ${row?.status === "approved" ? "text-green-500" : ""}  ${row?.status === "rejected" ? "text-red-600" : ""}`}>{row?.status}</p>,
         },
         {
             name: 'Action',

@@ -11,7 +11,7 @@ export default function ApplyJob() {
     const dispatch = useDispatch();
     const { id } = router.query
     const activeUser = useSelector(state => state.User.userData)
-    const [formikData, setFormikData] = useState({ name: '', email: "", about: '', job: id, user: activeUser?._id })
+    const [formikData, setFormikData] = useState({ name: '', email: activeUser?.email , about: '', job: id, user: activeUser?._id })
     const [file, setFile] = useState(null)
     const [error, setError] = useState({ name: '', email: "", about: '', job: '', user: '', cv: '' });
 
@@ -85,6 +85,8 @@ export default function ApplyJob() {
 
     }
 
+    
+
     return (
         <>
             <NavBar />
@@ -100,7 +102,7 @@ export default function ApplyJob() {
                     </div>
                     <div className='w-full mb-4  flex flex-col items-start justify-center'>
                         <label htmlFor="email" className='mb-1 text-base font-semibold'>Email :</label>
-                        <input name='email' onChange={(e) => setFormikData({ ...formikData, email: e.target.value })} type="email" id='email' className='w-full py-2 px-3 mb-2 border border-indigo-600 rounded' placeholder='Enter Email' />
+                        <input name='email' value={email} disabled type="email" id='email' className='w-full  py-2 px-3 mb-2 border border-indigo-600 rounded' placeholder='Enter Email' />
                         {
                             error.email && <p className="text-sm text-red-500">{error.email}</p>
                         }
