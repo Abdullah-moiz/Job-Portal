@@ -20,8 +20,10 @@
 - Track Your Posted Jobs and view Submitted Application 
 - Accept and Reject Different Application 
 - Status Updated for applied Job based on Job poster action 
-- View or download Applicant CV's (TODO)
 - JWT validation on each Authorized Request 
+#### ( Below Feature is works only in Local Environment as Vercel Don't allow write operation in free plan so CV are unable to saved but works fine in local App ) 
+- View or download Applicant CV's 
+
 
 
 ## Tech
