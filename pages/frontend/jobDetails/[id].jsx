@@ -91,7 +91,7 @@ export default function JobDetails() {
                             <div className='flex items-center  justify-center w-full py-10'>
                                 <div className='flex w-full px-8 md:px-20 items-start md:flex-row flex-col md:justify-between justify-center'>
                                     <div className='flex mb-1 items-center justify-center'>
-                                        <Image src={"https://xsgames.co/randomusers/avatar.php?g=male"} alt="no-image" className='rounded-full mb-2' width={100} height={100} />
+                                        <Image src={"/photo.png"} alt="no-image" className='rounded-full mb-2' width={100} height={100} />
                                         <div className='px-4 mx-2 flex flex-col items-start justify-center'>
                                             <p className='font-semibold text-base mb-1' >{JobDetails?.title} </p>
                                             <p className=' text-sm text-gray-800 mb-1'>{JobDetails?.company}</p>
