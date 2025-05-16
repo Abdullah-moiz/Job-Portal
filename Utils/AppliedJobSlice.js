@@ -21,4 +21,6 @@ export const appliedJobSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { setAppliedJob  , setBookMark} = appliedJobSlice.actions
 
-export const AppliedJobReducer =  appliedJobSlice.reducer
+export const AppliedJobReducer = appliedJobSlice.reducer
+
+// 
