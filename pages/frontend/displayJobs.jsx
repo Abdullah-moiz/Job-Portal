@@ -1,5 +1,8 @@
 import useSWRInfinite from 'swr/infinite';
 import { get_job } from '@/Services/job';
+import React from 'react';
+import NavBar from '@/components/NavBar';
+import JobsCard from '@/components/JobsCard';
 
 const PAGE_SIZE = 20;
 
