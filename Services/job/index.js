@@ -23,15 +23,15 @@ export const post_job = async (formData) => {
 
 
 // get job api
-export const get_job = async () => {
+export const get_job = async (page = 1, limit = 20) => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/getAllJobs`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/job/getAllJobs?page=${page}&limit=${limit}`, {
             method: 'GET',
-            headers : {
+            headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
         })
-        const data = res.json();
+        const data = await res.json();
         return data;
     } catch (error) {
         console.log('error in getting job (service) => ', error);
